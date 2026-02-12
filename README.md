@@ -1,0 +1,2 @@
+# MineBit
+MineBit minecraft server
