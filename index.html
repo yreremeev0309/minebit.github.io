@@ -2,248 +2,218 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MineBit — оранжевый ваниль</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="glow-line"></div>
-    <div class="glow-line glow-line-bottom"></div>
-
+    <!-- Анимированный фон -->
+    <div class="orange-neon-bg"></div>
+    <div class="orange-grid"></div>
+    
     <div class="container">
-        <!-- ШАПКА -->
+        <!-- ШАПКА С ЛОГОТИПОМ -->
         <div class="header">
             <div class="logo">
-                <span class="logo-icon">🟠</span>
-                <h1>Mine<span>Bit</span></h1>
+                <div class="logo-icon">
+                    <div class="orange-glow"></div>
+                    <span class="bit-logo">⛏️</span>
+                </div>
+                <div class="logo-text">
+                    <span class="mine">Mine</span><span class="bit">Bit</span>
+                </div>
             </div>
-            <div class="status">
-                <span class="status-dot" id="statusDot"></span>
+            <div class="server-status">
+                <div class="status-indicator" id="statusIndicator"></div>
                 <span id="statusText">Загрузка...</span>
+                <span class="online-count" id="onlineCount">0</span>
             </div>
         </div>
 
         <!-- НАВИГАЦИЯ -->
-        <div class="nav-bar">
-            <div class="nav-tab active" onclick="switchTab('home')">🏠 ГЛАВНАЯ</div>
-            <div class="nav-tab" onclick="switchTab('donate')">💰 ДОНАТ</div>
-            <div class="nav-tab" onclick="switchTab('gallery')">🖼️ ГАЛЕРЕЯ</div>
-            <div class="nav-tab" onclick="switchTab('team')">👥 КОМАНДА</div>
-            <div class="nav-tab" onclick="switchTab('rules')">📜 ПРАВИЛА</div>
+        <div class="navigation">
+            <button class="nav-btn active" data-tab="home">ГЛАВНАЯ</button>
+            <button class="nav-btn" data-tab="donate">ДОНАТ</button>
+            <button class="nav-btn" data-tab="gallery">ГАЛЕРЕЯ</button>
+            <button class="nav-btn" data-tab="team">КОМАНДА</button>
+            <button class="nav-btn" data-tab="rules">ПРАВИЛА</button>
         </div>
 
-        <!-- ВКЛАДКА ГЛАВНАЯ -->
-        <div id="tab-home" class="tab-content active">
+        <!-- ГЛАВНАЯ -->
+        <div id="home" class="tab active">
             <div class="hero">
-                <h2>ДОБРО ПОЖАЛОВАТЬ НА <span>MINEBIT</span></h2>
-                <p>⚡ Ванильный сервер • 1.16.5 — 1.21.11 • Честная игра • Уютное комьюнити</p>
+                <h1 class="glitch-text" data-text="MineBit">MineBit</h1>
+                <div class="hero-subtitle">⚡ ВАНИЛЬНЫЙ СЕРВЕР 1.16.5 — 1.21.11 ⚡</div>
                 
-                <div class="ip-container">
-                    <div class="ip-box">
-                        <div class="ip-address">
-                            <span id="serverIp">37.9.15.81:32568</span>
-                        </div>
-                        <button class="copy-btn" onclick="copyIP()">📋 КОПИРОВАТЬ IP</button>
-                        <div id="copyFeedback" class="copy-feedback"></div>
+                <div class="ip-block">
+                    <div class="ip-display">
+                        <span class="ip-address">37.9.15.81:32568</span>
                     </div>
+                    <button class="orange-btn" onclick="copyIP()">
+                        <span>📋 КОПИРОВАТЬ IP</span>
+                    </button>
+                    <div class="copy-feedback" id="copyFeedback"></div>
                 </div>
             </div>
 
-            <!-- СТАТИСТИКА -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="onlinePlayers">0</div>
-                    <p>ИГРОКОВ ОНЛАЙН</p>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-value" id="playersOnline">0</div>
+                    <div class="stat-label">ИГРОКОВ ОНЛАЙН</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">1.16.5-1.21.11</div>
-                    <p>ПОДДЕРЖИВАЕМЫЕ ВЕРСИИ</p>
+                <div class="stat-item">
+                    <div class="stat-value">1.16.5-1.21.11</div>
+                    <div class="stat-label">ВЕРСИИ</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <p>КРУГЛОСУТОЧНО</p>
+                <div class="stat-item">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">ДОСТУП</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">#1</div>
-                    <p>ВАНИЛЬ СЕРВЕР</p>
+                <div class="stat-item">
+                    <div class="stat-value">#1</div>
+                    <div class="stat-label">ВАНИЛЬ</div>
                 </div>
             </div>
 
-            <!-- ОСОБЕННОСТИ -->
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>ПОЛНЫЙ ВАНИЛЬ</h3>
-                    <p>Никаких модов, только защита от гриферов. Чистый Minecraft.</p>
+                <div class="feature">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>ЧЕСТНАЯ ИГРА</h3>
+                    <p>Никаких донат-привилегий. Только скиллы.</p>
                 </div>
-                <div class="feature-card">
+                <div class="feature">
                     <div class="feature-icon">🛡️</div>
-                    <h3>ПРОТИВОГРИФ</h3>
-                    <p>CoreProtect, WorldGuard, анти-чит. Твои постройки в безопасности.</p>
+                    <h3>ЗАЩИТА</h3>
+                    <p>CoreProtect, WorldGuard. Гриферы наказаны.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>БЕЗГРАНИЧНЫЙ МИР</h3>
-                    <p>Исследуй бескрайние земли. Строй, где хочешь.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎮</div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
                     <h3>ВСЕ ВЕРСИИ</h3>
-                    <p>Заходи с 1.16.5 до 1.21.11 — ViaVersion.</p>
+                    <p>Заходи с 1.16.5 до 1.21.11 через ViaVersion.</p>
                 </div>
-            </div>
-
-            <!-- ПОДКЛЮЧЕНИЕ -->
-            <div class="connect-section">
-                <h2 class="neon-title">⚡ КАК ПОДКЛЮЧИТЬСЯ?</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>СКОПИРУЙ IP</h3>
-                        <p>Нажми кнопку "Копировать IP" выше</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>ЗАПУСТИ MINECRAFT</h3>
-                        <p>Версия 1.16.5 — 1.21.11</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>ВСТАВЬ IP</h3>
-                        <p>Сетевая игра → Подключиться</p>
-                    </div>
-                </div>
-                <div class="version-badge">⛏️ ПОДДЕРЖИВАЕМЫЕ ВЕРСИИ: 1.16.5 — 1.21.11</div>
-            </div>
-        </div>
-
-        <!-- ВКЛАДКА ДОНАТ -->
-        <div id="tab-donate" class="tab-content">
-            <div class="donate-section">
-                <div class="donate-title">🔥 ПОДДЕРЖИ ПРОЕКТ</div>
-                <p class="donate-subtitle">Твоя помощь делает сервер лучше! Все донаты идут на развитие и аренду.</p>
-                
-                <div class="donate-cards">
-                    <div class="donate-card">
-                        <h4>СТАРТ</h4>
-                        <div class="donate-price">100₽</div>
-                        <ul class="donate-features">
-                            <li>✅ Доступ в прайм-тайм</li>
-                            <li>✅ Оранжевый ник</li>
-                            <li>✅ Команда /kit start</li>
-                            <li>✅ 5 домов</li>
-                        </ul>
-                        <button class="donate-btn" onclick="alert('Донат временно принимается вручную. Напиши администратору в Discord!')">ВЫБРАТЬ</button>
-                    </div>
-                    <div class="donate-card popular">
-                        <h4>ПРО</h4>
-                        <div class="donate-price">300₽</div>
-                        <ul class="donate-features">
-                            <li>✅ Всё из "Старт"</li>
-                            <li>✅ Неоновый оранжевый ник</li>
-                            <li>✅ Команды /feed, /heal</li>
-                            <li>✅ 10 домов</li>
-                            <li>✅ Личный варп</li>
-                        </ul>
-                        <button class="donate-btn" onclick="alert('Донат временно принимается вручную. Напиши администратору в Discord!')">ВЫБРАТЬ</button>
-                    </div>
-                    <div class="donate-card">
-                        <h4>ВИП</h4>
-                        <div class="donate-price">600₽</div>
-                        <ul class="donate-features">
-                            <li>✅ Всё из "Про"</li>
-                            <li>✅ Огненный оранжевый ник</li>
-                            <li>✅ Команда /fly</li>
-                            <li>✅ 20 домов</li>
-                            <li>✅ 3 личных варпа</li>
-                        </ul>
-                        <button class="donate-btn" onclick="alert('Донат временно принимается вручную. Напиши администратору в Discord!')">ВЫБРАТЬ</button>
-                    </div>
+                <div class="feature">
+                    <div class="feature-icon">💎</div>
+                    <h3>ЭКОНОМИКА</h3>
+                    <p>Внутриигровая валюта, магазины, аукцион.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА ГАЛЕРЕЯ -->
-        <div id="tab-gallery" class="tab-content">
-            <h2 class="section-title">🖼️ ГАЛЕРЕЯ СЕРВЕРА</h2>
-            <p class="section-subtitle">Постройки и атмосфера MineBit</p>
-            
+        <!-- ДОНАТ -->
+        <div id="donate" class="tab">
+            <h2 class="section-title">🔥 ПРИВИЛЕГИИ</h2>
+            <div class="donate-grid">
+                <div class="donate-card">
+                    <div class="donate-header">
+                        <h3>СТАРТ</h3>
+                        <div class="price">100₽</div>
+                    </div>
+                    <ul class="donate-list">
+                        <li>✅ Оранжевый ник</li>
+                        <li>✅ /kit start</li>
+                        <li>✅ 5 домов</li>
+                        <li>✅ Доступ в прайм-тайм</li>
+                    </ul>
+                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                </div>
+                <div class="donate-card popular">
+                    <div class="popular-badge">🔥 ХИТ</div>
+                    <div class="donate-header">
+                        <h3>ПРО</h3>
+                        <div class="price">300₽</div>
+                    </div>
+                    <ul class="donate-list">
+                        <li>✅ Всё из СТАРТ</li>
+                        <li>✅ Неоновый оранжевый ник</li>
+                        <li>✅ /feed, /heal</li>
+                        <li>✅ 10 домов</li>
+                        <li>✅ Личный варп</li>
+                    </ul>
+                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                </div>
+                <div class="donate-card">
+                    <div class="donate-header">
+                        <h3>ВИП</h3>
+                        <div class="price">600₽</div>
+                    </div>
+                    <ul class="donate-list">
+                        <li>✅ Всё из ПРО</li>
+                        <li>✅ Огненный оранжевый ник</li>
+                        <li>✅ /fly</li>
+                        <li>✅ 20 домов</li>
+                        <li>✅ 3 личных варпа</li>
+                    </ul>
+                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ -->
+        <div id="gallery" class="tab">
+            <h2 class="section-title">🖼️ ГАЛЕРЕЯ</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <div class="gallery-icon">🏰</div>
-                    <h3>СПАВН</h3>
-                    <p>Уютный спавн в оранжевых тонах</p>
+                    <div class="gallery-image">🏰</div>
+                    <p>Спавн</p>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-icon">⛰️</div>
-                    <h3>ГОРОД</h3>
-                    <p>Разрастающийся город игроков</p>
+                    <div class="gallery-image">⛰️</div>
+                    <p>Город игроков</p>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-icon">🏗️</div>
-                    <h3>ФЕРМЫ</h3>
-                    <p>Автоматические фермы</p>
+                    <div class="gallery-image">🏗️</div>
+                    <p>Фермы</p>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-icon">🌲</div>
-                    <h3>ДЕРЕВНИ</h3>
-                    <p>Живописные деревни жителей</p>
+                    <div class="gallery-image">🌲</div>
+                    <p>Деревни</p>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА КОМАНДА -->
-        <div id="tab-team" class="tab-content">
-            <h2 class="section-title">👥 АДМИНИСТРАЦИЯ</h2>
-            <p class="section-subtitle">Люди, которые делают MineBit лучше</p>
-            
+        <!-- КОМАНДА -->
+        <div id="team" class="tab">
+            <h2 class="section-title">👥 КОМАНДА</h2>
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-avatar">👑</div>
                     <h3>Remeev</h3>
-                    <p class="team-role">ВЛАДЕЛЕЦ</p>
-                    <p>Основатель сервера</p>
+                    <p class="team-role">Владелец</p>
                 </div>
                 <div class="team-card">
                     <div class="team-avatar">⚔️</div>
                     <h3>Admin</h3>
-                    <p class="team-role">ГЛАВНЫЙ АДМИН</p>
-                    <p>Следит за порядком</p>
+                    <p class="team-role">Главный админ</p>
                 </div>
                 <div class="team-card">
                     <div class="team-avatar">🛡️</div>
                     <h3>Moderator</h3>
-                    <p class="team-role">МОДЕРАТОР</p>
-                    <p>Борется с гриферами</p>
+                    <p class="team-role">Модератор</p>
                 </div>
             </div>
         </div>
 
-        <!-- ВКЛАДКА ПРАВИЛА -->
-        <div id="tab-rules" class="tab-content">
-            <h2 class="section-title">📜 ПРАВИЛА СЕРВЕРА</h2>
-            <p class="section-subtitle">Незнание правил не освобождает от ответственности</p>
-            
+        <!-- ПРАВИЛА -->
+        <div id="rules" class="tab">
+            <h2 class="section-title">📜 ПРАВИЛА</h2>
             <div class="rules-container">
                 <div class="rules-allowed">
                     <h3>✅ РАЗРЕШЕНО</h3>
                     <ul>
-                        <li>✔️ Строить и развиваться</li>
-                        <li>✔️ Торговать с игроками</li>
-                        <li>✔️ Использовать фермы</li>
-                        <li>✔️ Общаться в чате</li>
-                        <li>✔️ Помогать новичкам</li>
+                        <li>Строить и развиваться</li>
+                        <li>Торговать с игроками</li>
+                        <li>Использовать фермы</li>
+                        <li>Помогать новичкам</li>
                     </ul>
                 </div>
                 <div class="rules-forbidden">
                     <h3>❌ ЗАПРЕЩЕНО</h3>
                     <ul>
-                        <li>❌ Гриферство и воровство</li>
-                        <li>❌ Читы и моды</li>
-                        <li>❌ Оскорбления игроков</li>
-                        <li>❌ Спам и реклама</li>
-                        <li>❌ Обход банов</li>
+                        <li>Гриферство</li>
+                        <li>Читы</li>
+                        <li>Оскорбления</li>
+                        <li>Спам</li>
                     </ul>
                 </div>
             </div>
@@ -252,17 +222,9 @@
         <!-- ПОДВАЛ -->
         <div class="footer">
             <div class="footer-content">
-                <div>
-                    <h2 class="footer-logo">Mine<span>Bit</span></h2>
-                    <p>© 2026 Ванильный сервер MineBit</p>
-                    <p class="footer-ip">IP: 37.9.15.81:32568</p>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link">💬 Discord</a>
-                    <a href="#" class="social-link">📘 VK</a>
-                    <a href="#" class="social-link">📺 YouTube</a>
-                    <a href="#" class="social-link">📱 Telegram</a>
-                </div>
+                <div class="footer-logo">Mine<span>Bit</span></div>
+                <div class="footer-ip">37.9.15.81:32568</div>
+                <div class="footer-copyright">© 2026 Ванильный сервер</div>
             </div>
         </div>
     </div>
