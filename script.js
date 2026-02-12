@@ -5,77 +5,66 @@ const SERVER_IP = '37.9.15.81:32568';
 function copyIP() {
     navigator.clipboard.writeText(SERVER_IP).then(() => {
         const feedback = document.getElementById('copyFeedback');
-        feedback.textContent = '✅ IP скопирован! Заходи на сервер!';
+        feedback.textContent = '✅ IP СКОПИРОВАН!';
         feedback.classList.add('show');
-        
-        setTimeout(() => {
-            feedback.classList.remove('show');
-        }, 3000);
-    }).catch(() => {
-        alert('Не удалось скопировать IP. Ручной ввод: ' + SERVER_IP);
+        setTimeout(() => feedback.classList.remove('show'), 2000);
     });
 }
 
-// Переключение вкладок
-function switchTab(tabName) {
-    // Скрываем все вкладки
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.classList.remove('active'));
-    
-    // Убираем активный класс у всех кнопок
-    const navTabs = document.querySelectorAll('.nav-tab');
-    navTabs.forEach(tab => tab.classList.remove('active'));
-    
-    // Показываем выбранную вкладку
-    const activeTab = document.getElementById(`tab-${tabName}`);
-    if (activeTab) activeTab.classList.add('active');
-    
-    // Активируем кнопку
-    const activeButton = Array.from(navTabs).find(tab => 
-        tab.textContent.toLowerCase().includes(tabName)
-    );
-    if (activeButton) activeButton.classList.add('active');
-}
+// Навигация по вкладкам
+document.addEventListener('DOMContentLoaded', function() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const tabs = document.querySelectorAll('.tab');
 
-// Проверка статуса сервера
-function checkServerStatus() {
-    const statusDot = document.getElementById('statusDot');
-    const statusText = document.getElementById('statusText');
-    const onlineElement = document.getElementById('onlinePlayers');
-    
-    fetch(`https://api.mcsrvstat.us/2/37.9.15.81:32568`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.online) {
-                statusDot.style.background = '#ffaa00';
-                statusDot.style.boxShadow = '0 0 20px #ffaa00';
-                statusText.textContent = `ОНЛАЙН • ${data.players?.online || 0}/${data.players?.max || 100}`;
-                if (onlineElement) {
-                    onlineElement.textContent = data.players?.online || 0;
-                }
-            } else {
-                statusDot.style.background = '#e74c3c';
-                statusDot.style.boxShadow = '0 0 20px #e74c3c';
-                statusText.textContent = 'ОФФЛАЙН';
-                if (onlineElement) onlineElement.textContent = '0';
-            }
-        })
-        .catch(() => {
-            statusDot.style.background = '#95a5a6';
-            statusDot.style.boxShadow = 'none';
-            statusText.textContent = 'Нет данных';
-            if (onlineElement) onlineElement.textContent = '?';
+    navButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Убираем активный класс у всех
+            navButtons.forEach(b => b.classList.remove('active'));
+            tabs.forEach(t => t.classList.remove('active'));
+
+            // Активируем текущую кнопку
+            this.classList.add('active');
+
+            // Активируем соответствующую вкладку
+            const tabId = this.dataset.tab;
+            document.getElementById(tabId).classList.add('active');
         });
-}
+    });
 
-// Загрузка страницы
-window.onload = function() {
-    checkServerStatus();
-    setInterval(checkServerStatus, 60000);
-    
-    // Проверяем, что активна главная вкладка
-    const activeTab = document.querySelector('.tab-content.active');
-    if (!activeTab) {
-        document.getElementById('tab-home')?.classList.add('active');
+    // Статус сервера
+    function updateServerStatus() {
+        const indicator = document.getElementById('statusIndicator');
+        const statusText = document.getElementById('statusText');
+        const onlineCount = document.getElementById('onlineCount');
+        const playersOnline = document.getElementById('playersOnline');
+
+        fetch('https://api.mcsrvstat.us/2/37.9.15.81:32568')
+            .then(res => res.json())
+            .then(data => {
+                if (data.online) {
+                    indicator.style.background = '#ff8800';
+                    indicator.style.boxShadow = '0 0 20px #ff8800';
+                    statusText.textContent = 'ОНЛАЙН';
+                    const count = data.players?.online || 0;
+                    onlineCount.textContent = count;
+                    if (playersOnline) playersOnline.textContent = count;
+                } else {
+                    indicator.style.background = '#e74c3c';
+                    indicator.style.boxShadow = '0 0 20px #e74c3c';
+                    statusText.textContent = 'ОФФЛАЙН';
+                    onlineCount.textContent = '0';
+                    if (playersOnline) playersOnline.textContent = '0';
+                }
+            })
+            .catch(() => {
+                indicator.style.background = '#95a5a6';
+                indicator.style.boxShadow = 'none';
+                statusText.textContent = 'ОШИБКА';
+                onlineCount.textContent = '?';
+                if (playersOnline) playersOnline.textContent = '?';
+            });
     }
-};
+
+    updateServerStatus();
+    setInterval(updateServerStatus, 60000);
+});
