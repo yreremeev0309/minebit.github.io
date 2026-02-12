@@ -4,147 +4,601 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MineBit — оранжевый ваниль</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: #0a0c0e;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* ОРАНЖЕВЫЙ НЕОН ФОН */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 136, 0, 0.2) 0%, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(255, 136, 0, 0.15) 0%, transparent 35%),
+                radial-gradient(circle at 30% 80%, rgba(255, 136, 0, 0.1) 0%, transparent 40%),
+                #0a0c0e;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ШАПКА */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 60px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255,136,0,0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 40px;
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        .logo-text span {
+            color: #ff8800;
+            text-shadow: 0 0 15px #ff8800;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,136,0,0.1);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid #ff8800;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: #ff8800;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff8800;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        /* НАВИГАЦИЯ */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #ff8800;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: #ff8800;
+            color: black;
+            box-shadow: 0 0 25px #ff8800;
+            border-color: #ffaa00;
+        }
+
+        /* ВКЛАДКИ */
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+            animation: fade 0.4s;
+        }
+
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ГЛАВНАЯ */
+        .hero {
+            text-align: center;
+            padding: 60px 30px;
+            background: rgba(0,0,0,0.6);
+            border: 2px solid #ff8800;
+            border-radius: 40px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #ff8800;
+            text-shadow: 0 0 20px #ff8800, 0 0 40px #ff5500;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #ddd;
+            margin-bottom: 40px;
+        }
+
+        .ip-box {
+            background: #111;
+            border: 2px solid #ff8800;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .ip {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: monospace;
+            color: #ff8800;
+            text-shadow: 0 0 15px #ff8800;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #ff8800;
+            color: black;
+            border: none;
+            padding: 15px 45px;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 0 #aa5500;
+        }
+
+        .copy-btn:hover {
+            background: #ffaa00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #aa5500, 0 0 30px #ff8800;
+        }
+
+        .copy-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #aa5500;
+        }
+
+        .copy-feedback {
+            color: #ff8800;
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+
+        /* СТАТИСТИКА */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: #ff8800;
+            text-shadow: 0 0 15px #ff8800;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #ccc;
+            letter-spacing: 2px;
+        }
+
+        /* ОСОБЕННОСТИ */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .feature {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid #ff8800;
+            border-radius: 25px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: #ffaa00;
+            box-shadow: 0 0 35px rgba(255,136,0,0.4);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            color: #ff8800;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* ДОНАТ */
+        .donate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .donate-card {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #ff8800;
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .donate-card.popular {
+            border-color: #ffaa00;
+            box-shadow: 0 0 40px rgba(255,136,0,0.5);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff8800;
+            color: black;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+        }
+
+        .donate-card h3 {
+            font-size: 28px;
+            color: #ff8800;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 20px 0;
+            color: white;
+        }
+
+        .donate-card ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .donate-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,136,0,0.3);
+        }
+
+        /* ГАЛЕРЕЯ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .gallery-icon {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        /* КОМАНДА */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .team-card {
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 25px;
+            padding: 35px;
+            text-align: center;
+        }
+
+        .team-avatar {
+            font-size: 56px;
+            margin-bottom: 15px;
+        }
+
+        .team-card h3 {
+            color: #ff8800;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: #aaa;
+        }
+
+        /* ПРАВИЛА */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 40px 0;
+        }
+
+        .allowed h3 {
+            color: #2ecc71;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .forbidden h3 {
+            color: #e74c3c;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .allowed ul, .forbidden ul {
+            list-style: none;
+        }
+
+        .allowed li, .forbidden li {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        /* ПОДВАЛ */
+        .footer {
+            margin-top: 80px;
+            padding: 40px;
+            background: rgba(0,0,0,0.8);
+            border-top: 2px solid #ff8800;
+            border-radius: 40px 40px 0 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: #ff8800;
+            text-shadow: 0 0 15px #ff8800;
+        }
+
+        .footer-ip {
+            font-size: 20px;
+            color: #ff8800;
+            font-family: monospace;
+            margin: 15px 0;
+        }
+
+        h2.section-title {
+            font-size: 42px;
+            text-align: center;
+            color: white;
+            text-shadow: 0 0 15px #ff8800;
+            margin: 50px 0 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .ip { font-size: 24px; }
+            .header { flex-direction: column; gap: 15px; }
+            .status { width: 100%; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Анимированный фон -->
-    <div class="orange-neon-bg"></div>
-    <div class="orange-grid"></div>
-    
     <div class="container">
-        <!-- ШАПКА С ЛОГОТИПОМ -->
+        <!-- ШАПКА -->
         <div class="header">
             <div class="logo">
-                <div class="logo-icon">
-                    <div class="orange-glow"></div>
-                    <span class="bit-logo">⛏️</span>
-                </div>
+                <span class="logo-icon">⛏️</span>
                 <div class="logo-text">
-                    <span class="mine">Mine</span><span class="bit">Bit</span>
+                    Mine<span>Bit</span>
                 </div>
             </div>
-            <div class="server-status">
-                <div class="status-indicator" id="statusIndicator"></div>
+            <div class="status">
+                <span class="status-dot" id="statusDot"></span>
                 <span id="statusText">Загрузка...</span>
-                <span class="online-count" id="onlineCount">0</span>
+                <span style="background: #ff8800; color: black; padding: 5px 15px; border-radius: 50px; font-weight: 700;" id="onlineCount">0</span>
             </div>
         </div>
 
         <!-- НАВИГАЦИЯ -->
-        <div class="navigation">
-            <button class="nav-btn active" data-tab="home">ГЛАВНАЯ</button>
-            <button class="nav-btn" data-tab="donate">ДОНАТ</button>
-            <button class="nav-btn" data-tab="gallery">ГАЛЕРЕЯ</button>
-            <button class="nav-btn" data-tab="team">КОМАНДА</button>
-            <button class="nav-btn" data-tab="rules">ПРАВИЛА</button>
+        <div class="nav">
+            <button class="nav-btn active" onclick="switchTab('home')">🏠 ГЛАВНАЯ</button>
+            <button class="nav-btn" onclick="switchTab('donate')">💰 ДОНАТ</button>
+            <button class="nav-btn" onclick="switchTab('gallery')">🖼️ ГАЛЕРЕЯ</button>
+            <button class="nav-btn" onclick="switchTab('team')">👥 КОМАНДА</button>
+            <button class="nav-btn" onclick="switchTab('rules')">📜 ПРАВИЛА</button>
         </div>
 
         <!-- ГЛАВНАЯ -->
         <div id="home" class="tab active">
             <div class="hero">
-                <h1 class="glitch-text" data-text="MineBit">MineBit</h1>
-                <div class="hero-subtitle">⚡ ВАНИЛЬНЫЙ СЕРВЕР 1.16.5 — 1.21.11 ⚡</div>
-                
-                <div class="ip-block">
-                    <div class="ip-display">
-                        <span class="ip-address">37.9.15.81:32568</span>
-                    </div>
-                    <button class="orange-btn" onclick="copyIP()">
-                        <span>📋 КОПИРОВАТЬ IP</span>
-                    </button>
-                    <div class="copy-feedback" id="copyFeedback"></div>
+                <h1>Mine<span>Bit</span></h1>
+                <p>⚡ ВАНИЛЬНЫЙ СЕРВЕР • 1.16.5 — 1.21.11 ⚡</p>
+                <div class="ip-box">
+                    <div class="ip">37.9.15.81:32568</div>
+                    <button class="copy-btn" onclick="copyIP()">📋 КОПИРОВАТЬ IP</button>
+                    <div id="copyFeedback" class="copy-feedback"></div>
                 </div>
             </div>
 
-            <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-value" id="playersOnline">0</div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="playersOnline">0</div>
                     <div class="stat-label">ИГРОКОВ ОНЛАЙН</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">1.16.5-1.21.11</div>
+                <div class="stat-card">
+                    <div class="stat-number">1.16.5-1.21.11</div>
                     <div class="stat-label">ВЕРСИИ</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">24/7</div>
-                    <div class="stat-label">ДОСТУП</div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">РАБОТА</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-value">#1</div>
+                <div class="stat-card">
+                    <div class="stat-number">#1</div>
                     <div class="stat-label">ВАНИЛЬ</div>
                 </div>
             </div>
 
-            <div class="features-grid">
+            <div class="features">
                 <div class="feature">
                     <div class="feature-icon">⚔️</div>
                     <h3>ЧЕСТНАЯ ИГРА</h3>
-                    <p>Никаких донат-привилегий. Только скиллы.</p>
+                    <p>Никаких донат-привилегий. Только ваниль.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🛡️</div>
                     <h3>ЗАЩИТА</h3>
-                    <p>CoreProtect, WorldGuard. Гриферы наказаны.</p>
+                    <p>Гриферы наказаны. CoreProtect, WorldGuard.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">🌐</div>
                     <h3>ВСЕ ВЕРСИИ</h3>
-                    <p>Заходи с 1.16.5 до 1.21.11 через ViaVersion.</p>
+                    <p>1.16.5 → 1.21.11. ViaVersion.</p>
                 </div>
                 <div class="feature">
                     <div class="feature-icon">💎</div>
                     <h3>ЭКОНОМИКА</h3>
-                    <p>Внутриигровая валюта, магазины, аукцион.</p>
+                    <p>Магазины, аукцион, внутриигровая валюта.</p>
                 </div>
             </div>
         </div>
 
         <!-- ДОНАТ -->
         <div id="donate" class="tab">
-            <h2 class="section-title">🔥 ПРИВИЛЕГИИ</h2>
+            <h2 class="section-title">🔥 ДОНАТ</h2>
             <div class="donate-grid">
                 <div class="donate-card">
-                    <div class="donate-header">
-                        <h3>СТАРТ</h3>
-                        <div class="price">100₽</div>
-                    </div>
-                    <ul class="donate-list">
+                    <h3>СТАРТ</h3>
+                    <div class="price">100₽</div>
+                    <ul>
                         <li>✅ Оранжевый ник</li>
                         <li>✅ /kit start</li>
                         <li>✅ 5 домов</li>
                         <li>✅ Доступ в прайм-тайм</li>
                     </ul>
-                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                    <button class="copy-btn" style="padding: 12px 35px;" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
                 </div>
                 <div class="donate-card popular">
-                    <div class="popular-badge">🔥 ХИТ</div>
-                    <div class="donate-header">
-                        <h3>ПРО</h3>
-                        <div class="price">300₽</div>
-                    </div>
-                    <ul class="donate-list">
+                    <span class="popular-badge">🔥 ХИТ</span>
+                    <h3>ПРО</h3>
+                    <div class="price">300₽</div>
+                    <ul>
                         <li>✅ Всё из СТАРТ</li>
-                        <li>✅ Неоновый оранжевый ник</li>
+                        <li>✅ Неоновый ник</li>
                         <li>✅ /feed, /heal</li>
                         <li>✅ 10 домов</li>
                         <li>✅ Личный варп</li>
                     </ul>
-                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                    <button class="copy-btn" style="padding: 12px 35px;" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
                 </div>
                 <div class="donate-card">
-                    <div class="donate-header">
-                        <h3>ВИП</h3>
-                        <div class="price">600₽</div>
-                    </div>
-                    <ul class="donate-list">
+                    <h3>ВИП</h3>
+                    <div class="price">600₽</div>
+                    <ul>
                         <li>✅ Всё из ПРО</li>
-                        <li>✅ Огненный оранжевый ник</li>
+                        <li>✅ Огненный ник</li>
                         <li>✅ /fly</li>
                         <li>✅ 20 домов</li>
-                        <li>✅ 3 личных варпа</li>
+                        <li>✅ 3 варпа</li>
                     </ul>
-                    <button class="orange-btn" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
+                    <button class="copy-btn" style="padding: 12px 35px;" onclick="alert('Напиши администратору в Discord')">ВЫБРАТЬ</button>
                 </div>
             </div>
         </div>
@@ -154,20 +608,20 @@
             <h2 class="section-title">🖼️ ГАЛЕРЕЯ</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <div class="gallery-image">🏰</div>
-                    <p>Спавн</p>
+                    <div class="gallery-icon">🏰</div>
+                    <h3>Спавн</h3>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">⛰️</div>
-                    <p>Город игроков</p>
+                    <div class="gallery-icon">⛰️</div>
+                    <h3>Город</h3>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🏗️</div>
-                    <p>Фермы</p>
+                    <div class="gallery-icon">🏗️</div>
+                    <h3>Фермы</h3>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-image">🌲</div>
-                    <p>Деревни</p>
+                    <div class="gallery-icon">🌲</div>
+                    <h3>Деревни</h3>
                 </div>
             </div>
         </div>
@@ -179,17 +633,17 @@
                 <div class="team-card">
                     <div class="team-avatar">👑</div>
                     <h3>Remeev</h3>
-                    <p class="team-role">Владелец</p>
+                    <div class="team-role">Владелец</div>
                 </div>
                 <div class="team-card">
                     <div class="team-avatar">⚔️</div>
                     <h3>Admin</h3>
-                    <p class="team-role">Главный админ</p>
+                    <div class="team-role">Главный админ</div>
                 </div>
                 <div class="team-card">
                     <div class="team-avatar">🛡️</div>
                     <h3>Moderator</h3>
-                    <p class="team-role">Модератор</p>
+                    <div class="team-role">Модератор</div>
                 </div>
             </div>
         </div>
@@ -197,23 +651,23 @@
         <!-- ПРАВИЛА -->
         <div id="rules" class="tab">
             <h2 class="section-title">📜 ПРАВИЛА</h2>
-            <div class="rules-container">
-                <div class="rules-allowed">
+            <div class="rules-grid">
+                <div class="allowed">
                     <h3>✅ РАЗРЕШЕНО</h3>
                     <ul>
-                        <li>Строить и развиваться</li>
-                        <li>Торговать с игроками</li>
-                        <li>Использовать фермы</li>
-                        <li>Помогать новичкам</li>
+                        <li>✔️ Строить и развиваться</li>
+                        <li>✔️ Торговать с игроками</li>
+                        <li>✔️ Использовать фермы</li>
+                        <li>✔️ Помогать новичкам</li>
                     </ul>
                 </div>
-                <div class="rules-forbidden">
+                <div class="forbidden">
                     <h3>❌ ЗАПРЕЩЕНО</h3>
                     <ul>
-                        <li>Гриферство</li>
-                        <li>Читы</li>
-                        <li>Оскорбления</li>
-                        <li>Спам</li>
+                        <li>❌ Гриферство</li>
+                        <li>❌ Читы</li>
+                        <li>❌ Оскорбления</li>
+                        <li>❌ Спам</li>
                     </ul>
                 </div>
             </div>
@@ -221,14 +675,82 @@
 
         <!-- ПОДВАЛ -->
         <div class="footer">
-            <div class="footer-content">
-                <div class="footer-logo">Mine<span>Bit</span></div>
-                <div class="footer-ip">37.9.15.81:32568</div>
-                <div class="footer-copyright">© 2026 Ванильный сервер</div>
-            </div>
+            <div class="footer-logo">Mine<span>Bit</span></div>
+            <div class="footer-ip">37.9.15.81:32568</div>
+            <div>© 2026 Ванильный сервер. Честная игра.</div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // IP сервера
+        const SERVER_IP = '37.9.15.81:32568';
+
+        // Копирование IP
+        function copyIP() {
+            navigator.clipboard.writeText(SERVER_IP).then(() => {
+                const feedback = document.getElementById('copyFeedback');
+                feedback.textContent = '✅ IP СКОПИРОВАН!';
+                feedback.classList.add('show');
+                setTimeout(() => feedback.classList.remove('show'), 2000);
+            });
+        }
+
+        // Переключение вкладок
+        function switchTab(tabId) {
+            // Все вкладки
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Все кнопки
+            const btns = document.querySelectorAll('.nav-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            
+            // Активируем нужную вкладку
+            document.getElementById(tabId).classList.add('active');
+            
+            // Активируем кнопку
+            const activeBtn = Array.from(btns).find(btn => 
+                btn.textContent.toLowerCase().includes(tabId)
+            );
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        // Статус сервера
+        function updateStatus() {
+            fetch('https://api.mcsrvstat.us/2/37.9.15.81:32568')
+                .then(res => res.json())
+                .then(data => {
+                    const dot = document.getElementById('statusDot');
+                    const text = document.getElementById('statusText');
+                    const online = document.getElementById('onlineCount');
+                    const players = document.getElementById('playersOnline');
+                    
+                    if (data.online) {
+                        dot.style.background = '#ff8800';
+                        dot.style.boxShadow = '0 0 20px #ff8800';
+                        text.textContent = 'ОНЛАЙН';
+                        const count = data.players?.online || 0;
+                        online.textContent = count;
+                        if (players) players.textContent = count;
+                    } else {
+                        dot.style.background = '#e74c3c';
+                        dot.style.boxShadow = '0 0 20px #e74c3c';
+                        text.textContent = 'ОФФЛАЙН';
+                        online.textContent = '0';
+                        if (players) players.textContent = '0';
+                    }
+                })
+                .catch(() => {
+                    document.getElementById('statusText').textContent = 'ОШИБКА';
+                    document.getElementById('onlineCount').textContent = '?';
+                });
+        }
+
+        // Запуск
+        window.onload = function() {
+            updateStatus();
+            setInterval(updateStatus, 60000);
+        };
+    </script>
 </body>
 </html>
