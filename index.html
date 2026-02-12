@@ -16,6 +16,7 @@
             background: #0a0c0e;
             color: white;
             line-height: 1.6;
+            position: relative;
         }
 
         body::before {
@@ -455,20 +456,76 @@
             box-shadow: 0 8px 0 #aa5500, 0 0 30px #ff8800;
         }
 
-        .donate-form {
-            max-width: 600px;
-            margin: 40px auto 0;
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.9);
-            border: 2px solid #ff8800;
-            border-radius: 50px;
-            padding: 50px;
-            box-shadow: 0 0 50px rgba(255,136,0,0.3);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
             display: none;
+            justify-content: center;
+            align-items: center;
+            animation: modalFade 0.3s;
         }
 
-        .donate-form.active {
-            display: block;
-            animation: fade 0.5s;
+        @keyframes modalFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #0a0c0e, #1a1e22);
+            border: 3px solid #ff8800;
+            border-radius: 60px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 80px rgba(255,136,0,0.4);
+            animation: modalPop 0.4s;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #ff8800;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #ffaa00;
+            transform: rotate(90deg);
+            text-shadow: 0 0 20px #ff8800;
+        }
+
+        .modal-title {
+            color: #ff8800;
+            font-size: 36px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #ff8800;
+            letter-spacing: 3px;
         }
 
         .form-group {
@@ -499,23 +556,6 @@
         .form-input:focus {
             border-color: #ffaa00;
             box-shadow: 0 0 25px rgba(255,136,0,0.5);
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 18px 25px;
-            background: #111;
-            border: 2px solid #ff8800;
-            border-radius: 60px;
-            color: white;
-            font-size: 18px;
-            outline: none;
-            cursor: pointer;
-        }
-
-        .form-select option {
-            background: #111;
-            color: white;
         }
 
         .promo-group {
@@ -592,25 +632,6 @@
             font-size: 15px;
             min-height: 25px;
             color: #aaa;
-        }
-
-        .back-btn {
-            background: transparent;
-            color: #ff8800;
-            border: 2px solid #ff8800;
-            padding: 12px 25px;
-            border-radius: 60px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        .back-btn:hover {
-            background: rgba(255,136,0,0.1);
-            border-color: #ffaa00;
         }
 
         .team-row {
@@ -760,6 +781,8 @@
             .promo-group { flex-direction: column; }
             .promo-btn { padding: 15px; }
             .team-card { width: 100%; }
+            .modal-content { padding: 30px; }
+            .modal-title { font-size: 28px; }
         }
     </style>
 </head>
@@ -866,7 +889,7 @@
                         <li>✅ 5 домов</li>
                         <li>✅ Доступ в прайм-тайм</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="showDonateForm('СТАРТ', 100)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('СТАРТ', 100)">ВЫБРАТЬ</button>
                 </div>
                 
                 <div class="donate-card popular">
@@ -880,7 +903,7 @@
                         <li>✅ 10 домов</li>
                         <li>✅ Личный варп</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="showDonateForm('ПРО', 300)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('ПРО', 300)">ВЫБРАТЬ</button>
                 </div>
                 
                 <div class="donate-card">
@@ -893,56 +916,8 @@
                         <li>✅ 20 домов</li>
                         <li>✅ 3 личных варпа</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="showDonateForm('ВИП', 600)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('ВИП', 600)">ВЫБРАТЬ</button>
                 </div>
-            </div>
-
-            <!-- ФОРМА ОПЛАТЫ (СКРЫТА, ПОЯВЛЯЕТСЯ ПРИ ВЫБОРЕ) -->
-            <div id="paymentForm" class="donate-form">
-                <button class="back-btn" onclick="hideDonateForm()">← К ПРИВИЛЕГИЯМ</button>
-                
-                <h3 style="color: #ff8800; font-size: 32px; text-align: center; margin-bottom: 30px;" id="selectedPrivilegeTitle">ОФОРМЛЕНИЕ</h3>
-                
-                <!-- НИК ИГРОКА -->
-                <div class="form-group">
-                    <label class="form-label">🎮 ТВОЙ НИК</label>
-                    <input type="text" id="minecraftNick" class="form-input" placeholder="Введите ник" oninput="checkNick(this.value)">
-                    <div id="nickStatus" class="nick-status"></div>
-                </div>
-
-                <!-- ПРОМОКОД -->
-                <div class="form-group">
-                    <label class="form-label">🎟️ ПРОМОКОД</label>
-                    <div class="promo-group">
-                        <input type="text" id="promoCode" class="form-input" placeholder="Введите промокод">
-                        <button class="promo-btn" onclick="applyPromo()">ПРИМЕНИТЬ</button>
-                    </div>
-                    <div id="promoStatus" style="margin-top: 10px; font-size: 15px; color: #ffaa00;"></div>
-                </div>
-
-                <!-- СПОСОБ ОПЛАТЫ -->
-                <div class="form-group">
-                    <label class="form-label">💳 СПОСОБ ОПЛАТЫ</label>
-                    <div class="payment-methods">
-                        <div class="payment-method active" onclick="selectPayment(this, 'card')">💳 Карта</div>
-                        <div class="payment-method" onclick="selectPayment(this, 'sbp')">🏦 СБП</div>
-                        <div class="payment-method" onclick="selectPayment(this, 'qiwi')">📱 QIWI</div>
-                        <div class="payment-method" onclick="selectPayment(this, 'yoomoney')">⭐ ЮMoney</div>
-                    </div>
-                </div>
-
-                <!-- ИТОГО -->
-                <div class="total-price">
-                    <span>ИТОГО:</span>
-                    <span class="total-amount" id="totalAmount">300</span>
-                    <span style="color: white;">₽</span>
-                </div>
-
-                <!-- КНОПКА ОПЛАТЫ -->
-                <button class="donate-select-btn" onclick="processPayment()">💎 ОПЛАТИТЬ</button>
-                <p style="color: #888; font-size: 14px; text-align: center; margin-top: 25px;">
-                    После оплаты привилегия выдастся автоматически
-                </p>
             </div>
         </div>
 
@@ -1035,6 +1010,55 @@
         </div>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО ОПЛАТЫ -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">×</div>
+            <div id="modalPrivilegeTitle" class="modal-title">💰 ПРО — 300₽</div>
+            
+            <!-- НИК ИГРОКА -->
+            <div class="form-group">
+                <label class="form-label">🎮 ТВОЙ НИК</label>
+                <input type="text" id="modalMinecraftNick" class="form-input" placeholder="Введите ник" oninput="checkModalNick(this.value)">
+                <div id="modalNickStatus" class="nick-status"></div>
+            </div>
+
+            <!-- ПРОМОКОД -->
+            <div class="form-group">
+                <label class="form-label">🎟️ ПРОМОКОД</label>
+                <div class="promo-group">
+                    <input type="text" id="modalPromoCode" class="form-input" placeholder="Введите промокод">
+                    <button class="promo-btn" onclick="applyModalPromo()">ПРИМЕНИТЬ</button>
+                </div>
+                <div id="modalPromoStatus" style="margin-top: 10px; font-size: 15px; color: #ffaa00;"></div>
+            </div>
+
+            <!-- СПОСОБ ОПЛАТЫ -->
+            <div class="form-group">
+                <label class="form-label">💳 СПОСОБ ОПЛАТЫ</label>
+                <div class="payment-methods">
+                    <div class="payment-method active" onclick="selectModalPayment(this, 'card')">💳 Карта</div>
+                    <div class="payment-method" onclick="selectModalPayment(this, 'sbp')">🏦 СБП</div>
+                    <div class="payment-method" onclick="selectModalPayment(this, 'qiwi')">📱 QIWI</div>
+                    <div class="payment-method" onclick="selectModalPayment(this, 'yoomoney')">⭐ ЮMoney</div>
+                </div>
+            </div>
+
+            <!-- ИТОГО -->
+            <div class="total-price">
+                <span>ИТОГО:</span>
+                <span class="total-amount" id="modalTotalAmount">300</span>
+                <span style="color: white;">₽</span>
+            </div>
+
+            <!-- КНОПКА ОПЛАТЫ -->
+            <button class="donate-select-btn" onclick="processModalPayment()">💎 ОПЛАТИТЬ</button>
+            <p style="color: #888; font-size: 14px; text-align: center; margin-top: 25px;">
+                После оплаты привилегия выдастся автоматически
+            </p>
+        </div>
+    </div>
+
     <script>
         // =================================================================
         // ========== MINEBIT — ПОЛНЫЙ СКРИПТ =============================
@@ -1042,8 +1066,8 @@
 
         const SERVER_IP = '37.9.15.81';
         const SERVER_PORT = '32568';
-        let selectedPrice = 300;
         let selectedPrivilege = 'ПРО';
+        let selectedPrice = 300;
 
         // КОПИРОВАНИЕ IP
         function copyIP() {
@@ -1074,30 +1098,41 @@
                 btn.textContent && btn.textContent.toLowerCase().includes(tabId)
             );
             if (activeBtn) activeBtn.classList.add('active');
-            
-            // Скрываем форму оплаты при переключении
-            hideDonateForm();
         }
 
-        // ПОКАЗАТЬ ФОРМУ ОПЛАТЫ
-        function showDonateForm(privilege, price) {
+        // ==================== МОДАЛЬНОЕ ОКНО ====================
+        
+        // ОТКРЫТЬ МОДАЛКУ
+        function openModal(privilege, price) {
             selectedPrivilege = privilege;
             selectedPrice = price;
             
-            document.getElementById('selectedPrivilegeTitle').innerHTML = `💰 ${privilege} — ${price}₽`;
-            document.getElementById('totalAmount').textContent = price;
+            document.getElementById('modalPrivilegeTitle').innerHTML = `💰 ${privilege} — ${price}₽`;
+            document.getElementById('modalTotalAmount').textContent = price;
             
-            document.querySelector('.donate-form').classList.add('active');
+            // Очищаем поля
+            document.getElementById('modalMinecraftNick').value = '';
+            document.getElementById('modalPromoCode').value = '';
+            document.getElementById('modalNickStatus').innerHTML = '';
+            document.getElementById('modalPromoStatus').innerHTML = '';
+            
+            // Сбрасываем способ оплаты
+            const methods = document.querySelectorAll('#paymentModal .payment-method');
+            methods.forEach(m => m.classList.remove('active'));
+            methods[0].classList.add('active');
+            
+            // Показываем модалку
+            document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        // СКРЫТЬ ФОРМУ ОПЛАТЫ
-        function hideDonateForm() {
-            document.querySelector('.donate-form').classList.remove('active');
+        // ЗАКРЫТЬ МОДАЛКУ
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
         }
 
-        // ПРОВЕРКА НИКА
-        function checkNick(nick) {
-            const status = document.getElementById('nickStatus');
+        // ПРОВЕРКА НИКА В МОДАЛКЕ
+        function checkModalNick(nick) {
+            const status = document.getElementById('modalNickStatus');
             if (nick.length < 3) {
                 status.innerHTML = '⚠️ Минимум 3 символа';
                 status.style.color = '#ffaa00';
@@ -1113,18 +1148,18 @@
             return true;
         }
 
-        // ВЫБОР СПОСОБА ОПЛАТЫ
-        function selectPayment(element, method) {
-            const methods = document.querySelectorAll('.payment-method');
+        // ВЫБОР СПОСОБА ОПЛАТЫ В МОДАЛКЕ
+        function selectModalPayment(element, method) {
+            const methods = document.querySelectorAll('#paymentModal .payment-method');
             methods.forEach(m => m.classList.remove('active'));
             element.classList.add('active');
         }
 
-        // ПРИМЕНЕНИЕ ПРОМОКОДА
-        function applyPromo() {
-            const promo = document.getElementById('promoCode').value;
-            const status = document.getElementById('promoStatus');
-            const totalElement = document.getElementById('totalAmount');
+        // ПРИМЕНЕНИЕ ПРОМОКОДА В МОДАЛКЕ
+        function applyModalPromo() {
+            const promo = document.getElementById('modalPromoCode').value;
+            const status = document.getElementById('modalPromoStatus');
+            const totalElement = document.getElementById('modalTotalAmount');
             let currentPrice = parseInt(totalElement.textContent);
             
             if (promo.toLowerCase() === 'minebit') {
@@ -1145,25 +1180,36 @@
             }
         }
 
-        // ОБРАБОТКА ОПЛАТЫ
-        function processPayment() {
-            const nick = document.getElementById('minecraftNick').value;
+        // ОБРАБОТКА ОПЛАТЫ В МОДАЛКЕ
+        function processModalPayment() {
+            const nick = document.getElementById('modalMinecraftNick').value;
             if (!nick) {
                 alert('❌ Введи ник!');
                 return;
             }
             
-            if (!checkNick(nick)) {
+            if (!checkModalNick(nick)) {
                 alert('❌ Некорректный ник!');
                 return;
             }
 
-            const price = document.getElementById('totalAmount').textContent;
-            const paymentMethod = document.querySelector('.payment-method.active');
+            const price = document.getElementById('modalTotalAmount').textContent;
+            const paymentMethod = document.querySelector('#paymentModal .payment-method.active');
             const method = paymentMethod ? paymentMethod.textContent.trim() : 'Карта';
             
             alert(`✅ Перенаправление на оплату...\n\nПривилегия: ${selectedPrivilege}\nСумма: ${price}₽\nНик: ${nick}\nСпособ: ${method}`);
+            
+            // Закрываем модалку
+            closeModal();
         }
+
+        // ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ НА ФОН
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('paymentModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
 
         // СТАТУС СЕРВЕРА И СПИСОК ИГРОКОВ
         async function checkServerStatus() {
