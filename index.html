@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>MineBit — оранжевый ваниль</title>
     <style>
         * {
@@ -17,6 +17,8 @@
             color: white;
             line-height: 1.6;
             position: relative;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body::before {
@@ -40,8 +42,10 @@
             padding: 20px;
             position: relative;
             z-index: 10;
+            width: 100%;
         }
 
+        /* ШАПКА */
         .header {
             display: flex;
             justify-content: space-between;
@@ -53,6 +57,7 @@
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(255,136,0,0.3);
+            width: 100%;
         }
 
         .logo {
@@ -83,6 +88,7 @@
             padding: 10px 25px;
             border-radius: 50px;
             border: 1px solid #ff8800;
+            flex-wrap: wrap;
         }
 
         .status-dot {
@@ -99,6 +105,7 @@
             50% { opacity: 0.7; transform: scale(1.2); }
         }
 
+        /* НАВИГАЦИЯ */
         .nav {
             display: flex;
             justify-content: center;
@@ -143,6 +150,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ГЛАВНАЯ */
         .hero {
             text-align: center;
             padding: 60px 30px;
@@ -151,6 +159,7 @@
             border-radius: 40px;
             margin-bottom: 50px;
             backdrop-filter: blur(10px);
+            width: 100%;
         }
 
         .hero h1 {
@@ -227,9 +236,10 @@
             opacity: 1;
         }
 
+        /* СТАТИСТИКА */
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
             margin-bottom: 50px;
         }
@@ -238,7 +248,7 @@
             background: rgba(0,0,0,0.7);
             border: 2px solid #ff8800;
             border-radius: 25px;
-            padding: 30px;
+            padding: 30px 15px;
             text-align: center;
             backdrop-filter: blur(5px);
         }
@@ -257,9 +267,10 @@
             letter-spacing: 2px;
         }
 
+        /* ОСОБЕННОСТИ */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             margin-bottom: 50px;
         }
@@ -290,6 +301,7 @@
             margin-bottom: 15px;
         }
 
+        /* ИГРОКИ */
         .players-section {
             margin: 60px 0;
             padding: 40px;
@@ -297,6 +309,7 @@
             border: 2px solid #ff8800;
             border-radius: 40px;
             backdrop-filter: blur(10px);
+            width: 100%;
         }
 
         .players-title {
@@ -329,13 +342,9 @@
             color: white;
             transition: 0.3s;
             backdrop-filter: blur(5px);
-        }
-
-        .player-card:hover {
-            background: #ff8800;
-            color: black;
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px #ff8800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .no-players {
@@ -355,6 +364,7 @@
             font-size: 20px;
         }
 
+        /* ЗАГОЛОВКИ */
         .section-title {
             font-size: 48px;
             text-align: center;
@@ -365,9 +375,10 @@
             letter-spacing: 4px;
         }
 
+        /* ДОНАТ КАРТОЧКИ */
         .donate-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin: 40px 0;
         }
@@ -407,6 +418,7 @@
             font-weight: 900;
             font-size: 18px;
             box-shadow: 0 0 20px #ff8800;
+            white-space: nowrap;
         }
 
         .donate-card h3 {
@@ -463,18 +475,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             backdrop-filter: blur(15px);
             z-index: 9999;
             display: none;
             justify-content: center;
             align-items: center;
             animation: modalFade 0.3s;
-        }
-
-        @keyframes modalFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            padding: 20px;
         }
 
         .modal-content {
@@ -483,17 +491,12 @@
             border-radius: 60px;
             padding: 50px;
             max-width: 600px;
-            width: 90%;
+            width: 100%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             box-shadow: 0 0 80px rgba(255,136,0,0.4);
             animation: modalPop 0.4s;
-        }
-
-        @keyframes modalPop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-close {
@@ -528,6 +531,7 @@
             letter-spacing: 3px;
         }
 
+        /* ФОРМА */
         .form-group {
             margin-bottom: 30px;
         }
@@ -583,7 +587,7 @@
 
         .payment-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-top: 15px;
         }
@@ -634,6 +638,7 @@
             color: #aaa;
         }
 
+        /* КОМАНДА */
         .team-row {
             display: flex;
             justify-content: center;
@@ -653,12 +658,6 @@
             box-shadow: 0 0 40px rgba(255,136,0,0.25);
             position: relative;
             transition: 0.4s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-10px);
-            border-color: #ffaa00;
-            box-shadow: 0 0 60px rgba(255,136,0,0.4);
         }
 
         .team-card.owner {
@@ -700,6 +699,7 @@
             font-size: 18px;
         }
 
+        /* ВАКАНСИИ */
         .vacancy-section {
             margin-top: 60px;
             padding: 50px;
@@ -744,6 +744,46 @@
             margin-bottom: 10px;
         }
 
+        /* ПРАВИЛА */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8800;
+            border-radius: 40px;
+            padding: 50px;
+            margin: 40px 0;
+        }
+
+        .rules-allowed h3 {
+            color: #2ecc71;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .rules-forbidden h3 {
+            color: #e74c3c;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .rules-allowed ul, .rules-forbidden ul {
+            list-style: none;
+            padding: 0 20px;
+        }
+
+        .rules-allowed li, .rules-forbidden li {
+            margin: 20px 0;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ПОДВАЛ */
         .footer {
             margin-top: 80px;
             padding: 40px;
@@ -771,18 +811,220 @@
             margin: 15px 0;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 48px; }
-            .ip { font-size: 24px; }
-            .header { flex-direction: column; gap: 15px; }
-            .status { width: 100%; justify-content: center; }
-            .players-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-            .section-title { font-size: 36px; }
-            .promo-group { flex-direction: column; }
-            .promo-btn { padding: 15px; }
-            .team-card { width: 100%; }
-            .modal-content { padding: 30px; }
-            .modal-title { font-size: 28px; }
+        /* ========== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ========== */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .status {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+                padding: 0 10px;
+            }
+
+            .ip {
+                font-size: 24px;
+                word-break: break-all;
+            }
+
+            .copy-btn {
+                padding: 12px 30px;
+                font-size: 18px;
+                width: 100%;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .stat-label {
+                font-size: 14px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .players-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+
+            .player-card {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .donate-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .donate-card.popular {
+                transform: scale(1);
+            }
+
+            .modal-content {
+                padding: 30px;
+            }
+
+            .modal-title {
+                font-size: 28px;
+            }
+
+            .payment-methods {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .promo-group {
+                flex-direction: column;
+            }
+
+            .promo-btn {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .total-price {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .team-card {
+                width: 100%;
+                padding: 30px;
+            }
+
+            .team-card h3 {
+                font-size: 36px;
+            }
+
+            .team-role {
+                font-size: 18px;
+                padding: 6px 25px;
+            }
+
+            .vacancy-section {
+                padding: 30px;
+            }
+
+            .vacancy-title {
+                font-size: 28px;
+            }
+
+            .vacancy-grid {
+                gap: 20px;
+            }
+
+            .vacancy-item {
+                width: 100%;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .rules-allowed h3, .rules-forbidden h3 {
+                font-size: 28px;
+            }
+
+            .footer {
+                padding: 30px;
+            }
+
+            .footer-ip {
+                font-size: 18px;
+                word-break: break-all;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .ip {
+                font-size: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                padding: 20px;
+            }
+
+            .players-section {
+                padding: 25px;
+            }
+
+            .players-title {
+                font-size: 28px;
+            }
+
+            .no-players {
+                padding: 30px;
+                font-size: 18px;
+            }
+
+            .modal-content {
+                padding: 25px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+
+            .form-label {
+                font-size: 18px;
+            }
+
+            .form-input {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .team-card h3 {
+                font-size: 32px;
+            }
+
+            .team-avatar {
+                font-size: 60px;
+            }
         }
     </style>
 </head>
@@ -928,9 +1170,8 @@
                 ЛЮДИ, КОТОРЫЕ ДЕЛАЮТ СЕРВЕР ЛУЧШЕ
             </p>
             
-            <!-- ОСНОВАТЕЛЬ И ТЕХ АДМИН В ОДНОЙ СТРОКЕ -->
+            <!-- ОСНОВАТЕЛЬ И ТЕХ АДМИН -->
             <div class="team-row">
-                <!-- ОСНОВАТЕЛЬ -->
                 <div class="team-card owner">
                     <div class="team-avatar">👑</div>
                     <h3>Fre4ze4</h3>
@@ -940,7 +1181,6 @@
                     </p>
                 </div>
                 
-                <!-- ТЕХ АДМИН (ТЫ) -->
                 <div class="team-card">
                     <div class="team-avatar">⚙️</div>
                     <h3>R4Serph</h3>
@@ -980,23 +1220,23 @@
         <!-- ПРАВИЛА -->
         <div id="rules" class="tab">
             <h2 class="section-title">📜 ПРАВИЛА</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; background: rgba(0,0,0,0.7); border: 2px solid #ff8800; border-radius: 40px; padding: 50px; margin: 40px 0;">
-                <div>
-                    <h3 style="color: #2ecc71; font-size: 32px; margin-bottom: 30px;">✅ РАЗРЕШЕНО</h3>
-                    <ul style="list-style: none;">
-                        <li style="margin: 20px 0; font-size: 20px;">✔️ Строить и развиваться</li>
-                        <li style="margin: 20px 0; font-size: 20px;">✔️ Торговать с игроками</li>
-                        <li style="margin: 20px 0; font-size: 20px;">✔️ Использовать фермы</li>
-                        <li style="margin: 20px 0; font-size: 20px;">✔️ Помогать новичкам</li>
+            <div class="rules-grid">
+                <div class="rules-allowed">
+                    <h3>✅ РАЗРЕШЕНО</h3>
+                    <ul>
+                        <li>✔️ Строить и развиваться</li>
+                        <li>✔️ Торговать с игроками</li>
+                        <li>✔️ Использовать фермы</li>
+                        <li>✔️ Помогать новичкам</li>
                     </ul>
                 </div>
-                <div>
-                    <h3 style="color: #e74c3c; font-size: 32px; margin-bottom: 30px;">❌ ЗАПРЕЩЕНО</h3>
-                    <ul style="list-style: none;">
-                        <li style="margin: 20px 0; font-size: 20px;">❌ Гриферство</li>
-                        <li style="margin: 20px 0; font-size: 20px;">❌ Читы</li>
-                        <li style="margin: 20px 0; font-size: 20px;">❌ Оскорбления</li>
-                        <li style="margin: 20px 0; font-size: 20px;">❌ Спам</li>
+                <div class="rules-forbidden">
+                    <h3>❌ ЗАПРЕЩЕНО</h3>
+                    <ul>
+                        <li>❌ Гриферство</li>
+                        <li>❌ Читы</li>
+                        <li>❌ Оскорбления</li>
+                        <li>❌ Спам</li>
                     </ul>
                 </div>
             </div>
@@ -1016,14 +1256,12 @@
             <div class="modal-close" onclick="closeModal()">×</div>
             <div id="modalPrivilegeTitle" class="modal-title">💰 ПРО — 300₽</div>
             
-            <!-- НИК ИГРОКА -->
             <div class="form-group">
                 <label class="form-label">🎮 ТВОЙ НИК</label>
                 <input type="text" id="modalMinecraftNick" class="form-input" placeholder="Введите ник" oninput="checkModalNick(this.value)">
                 <div id="modalNickStatus" class="nick-status"></div>
             </div>
 
-            <!-- ПРОМОКОД -->
             <div class="form-group">
                 <label class="form-label">🎟️ ПРОМОКОД</label>
                 <div class="promo-group">
@@ -1033,7 +1271,6 @@
                 <div id="modalPromoStatus" style="margin-top: 10px; font-size: 15px; color: #ffaa00;"></div>
             </div>
 
-            <!-- СПОСОБ ОПЛАТЫ -->
             <div class="form-group">
                 <label class="form-label">💳 СПОСОБ ОПЛАТЫ</label>
                 <div class="payment-methods">
@@ -1044,14 +1281,12 @@
                 </div>
             </div>
 
-            <!-- ИТОГО -->
             <div class="total-price">
                 <span>ИТОГО:</span>
                 <span class="total-amount" id="modalTotalAmount">300</span>
                 <span style="color: white;">₽</span>
             </div>
 
-            <!-- КНОПКА ОПЛАТЫ -->
             <button class="donate-select-btn" onclick="processModalPayment()">💎 ОПЛАТИТЬ</button>
             <p style="color: #888; font-size: 14px; text-align: center; margin-top: 25px;">
                 После оплаты привилегия выдастся автоматически
@@ -1060,16 +1295,12 @@
     </div>
 
     <script>
-        // =================================================================
-        // ========== MINEBIT — ПОЛНЫЙ СКРИПТ =============================
-        // =================================================================
-
+        // ========== MINEBIT — ПОЛНЫЙ СКРИПТ ==========
         const SERVER_IP = '37.9.15.81';
         const SERVER_PORT = '32568';
         let selectedPrivilege = 'ПРО';
         let selectedPrice = 300;
 
-        // КОПИРОВАНИЕ IP
         function copyIP() {
             navigator.clipboard.writeText(`${SERVER_IP}:${SERVER_PORT}`).then(() => {
                 const feedback = document.getElementById('copyFeedback');
@@ -1079,58 +1310,40 @@
                     feedback.classList.remove('show');
                     feedback.textContent = '';
                 }, 2000);
-            }).catch(() => {
-                alert(`IP: ${SERVER_IP}:${SERVER_PORT}`);
             });
         }
 
-        // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
         function switchTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
             const btns = document.querySelectorAll('.nav-btn');
-            
             tabs.forEach(tab => tab.classList.remove('active'));
             btns.forEach(btn => btn.classList.remove('active'));
-            
             document.getElementById(tabId).classList.add('active');
-            
             const activeBtn = Array.from(btns).find(btn => 
                 btn.textContent && btn.textContent.toLowerCase().includes(tabId)
             );
             if (activeBtn) activeBtn.classList.add('active');
         }
 
-        // ==================== МОДАЛЬНОЕ ОКНО ====================
-        
-        // ОТКРЫТЬ МОДАЛКУ
         function openModal(privilege, price) {
             selectedPrivilege = privilege;
             selectedPrice = price;
-            
             document.getElementById('modalPrivilegeTitle').innerHTML = `💰 ${privilege} — ${price}₽`;
             document.getElementById('modalTotalAmount').textContent = price;
-            
-            // Очищаем поля
             document.getElementById('modalMinecraftNick').value = '';
             document.getElementById('modalPromoCode').value = '';
             document.getElementById('modalNickStatus').innerHTML = '';
             document.getElementById('modalPromoStatus').innerHTML = '';
-            
-            // Сбрасываем способ оплаты
             const methods = document.querySelectorAll('#paymentModal .payment-method');
             methods.forEach(m => m.classList.remove('active'));
             methods[0].classList.add('active');
-            
-            // Показываем модалку
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
-        // ЗАКРЫТЬ МОДАЛКУ
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
         }
 
-        // ПРОВЕРКА НИКА В МОДАЛКЕ
         function checkModalNick(nick) {
             const status = document.getElementById('modalNickStatus');
             if (nick.length < 3) {
@@ -1148,14 +1361,12 @@
             return true;
         }
 
-        // ВЫБОР СПОСОБА ОПЛАТЫ В МОДАЛКЕ
         function selectModalPayment(element, method) {
             const methods = document.querySelectorAll('#paymentModal .payment-method');
             methods.forEach(m => m.classList.remove('active'));
             element.classList.add('active');
         }
 
-        // ПРИМЕНЕНИЕ ПРОМОКОДА В МОДАЛКЕ
         function applyModalPromo() {
             const promo = document.getElementById('modalPromoCode').value;
             const status = document.getElementById('modalPromoStatus');
@@ -1180,30 +1391,23 @@
             }
         }
 
-        // ОБРАБОТКА ОПЛАТЫ В МОДАЛКЕ
         function processModalPayment() {
             const nick = document.getElementById('modalMinecraftNick').value;
             if (!nick) {
                 alert('❌ Введи ник!');
                 return;
             }
-            
             if (!checkModalNick(nick)) {
                 alert('❌ Некорректный ник!');
                 return;
             }
-
             const price = document.getElementById('modalTotalAmount').textContent;
             const paymentMethod = document.querySelector('#paymentModal .payment-method.active');
             const method = paymentMethod ? paymentMethod.textContent.trim() : 'Карта';
-            
             alert(`✅ Перенаправление на оплату...\n\nПривилегия: ${selectedPrivilege}\nСумма: ${price}₽\nНик: ${nick}\nСпособ: ${method}`);
-            
-            // Закрываем модалку
             closeModal();
         }
 
-        // ЗАКРЫТИЕ МОДАЛКИ ПО КЛИКУ НА ФОН
         document.addEventListener('click', function(event) {
             const modal = document.getElementById('paymentModal');
             if (event.target === modal) {
@@ -1211,7 +1415,6 @@
             }
         });
 
-        // СТАТУС СЕРВЕРА И СПИСОК ИГРОКОВ
         async function checkServerStatus() {
             try {
                 const statusDot = document.getElementById('statusDot');
@@ -1261,12 +1464,10 @@
                     }
                 }
             } catch (error) {
-                console.error('Ошибка:', error);
                 document.getElementById('statusText').textContent = '⚠️ ОШИБКА';
             }
         }
 
-        // ЗАПУСК ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
             checkServerStatus();
             setInterval(checkServerStatus, 30000);
