@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MineBit — ванильный Minecraft сервер</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="container">
+        <!-- ШАПКА -->
+        <div class="header">
+            <div class="logo">
+                <img src="assets/logo.png" alt="MineBit Logo" class="logo-img" onerror="this.src='https://i.imgur.com/4m8pZqD.png'">
+                <h1>Mine<span>Bit</span></h1>
+            </div>
+            <div class="status">
+                <span class="status-dot"></span>
+                <span id="status-text">Проверка...</span>
+            </div>
+        </div>
+
+        <!-- ГЛАВНЫЙ БЛОК -->
+        <div class="hero">
+            <h2>Добро пожаловать на <span>MineBit</span></h2>
+            <p>Ванильный сервер без привилегий. Только честная игра, друзья и настоящий Minecraft.</p>
+            
+            <!-- БЛОК IP -->
+            <div class="ip-box">
+                <div class="ip-address">
+                    <span>37.9.15.81:32568</span>
+                </div>
+                <button class="copy-btn" onclick="copyIP()">Копировать IP</button>
+                <div id="copyFeedback" class="copy-feedback"></div>
+            </div>
+        </div>
+
+        <!-- ОСОБЕННОСТИ -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⛏️</div>
+                <h3>Ванильный</h3>
+                <p>Чистый Minecraft без модов. Только проверенные плагины для защиты.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>Анти-гриф</h3>
+                <p>Твои постройки под надежной защитой. CoreProtect, WorldGuard.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎮</div>
+                <h3>1.16+ — 1.20</h3>
+                <p>Заходи с любой версии от 1.16 до 1.20.4. ViaVersion на сервере.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Уютное комьюнити</h3>
+                <p>Без токсичности. Адекватные игроки, отзывчивая администрация.</p>
+            </div>
+        </div>
+
+        <!-- ПОДКЛЮЧЕНИЕ -->
+        <div class="connect-section">
+            <h3>⚡ Как зайти?</h3>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">1. Скопируй IP кнопкой выше</p>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">2. Открой Minecraft → Сетевая игра</p>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">3. Вставь IP и нажми "Подключиться"</p>
+            <div class="version">Поддерживаемые версии: 1.16 — 1.20.4</div>
+        </div>
+
+        <!-- ПОДВАЛ -->
+        <div class="footer">
+            <p>© 2026 MineBit. Ванильный сервер для настоящих ценителей.</p>
+            <p style="margin-top: 10px;">
+                <a href="#">ВКонтакте</a> • 
+                <a href="#">Discord</a> • 
+                <a href="#">Telegram</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">IP: 37.9.15.81:32568 • Порт сайта: 8081</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+/* ===== ОБНУЛЕНИЕ ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(145deg, #0a0c12 0%, #1a1e26 100%);
+    color: #fff;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===== ФОН КУБИКИ ===== */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.particles::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, rgba(70, 130, 200, 0.1) 2px, transparent 2px),
+        linear-gradient(-45deg, rgba(100, 180, 255, 0.1) 2px, transparent 2px);
+    background-size: 60px 60px;
+    animation: float 20s linear infinite;
+}
+
+@keyframes float {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+/* ===== КОНТЕЙНЕР ===== */
+.container {
+    max-width: 1200px;
+    width: 100%;
+    background: rgba(10, 15, 20, 0.7);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(50, 200, 100, 0.3);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.container:hover {
+    border-color: rgba(50, 200, 100, 0.7);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 120, 0.3);
+}
+
+/* ===== ШАПКА ===== */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-img {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 100, 0.5));
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 0 #0a0c0e, 6px 6px 20px #2ecc71;
+}
+
+.logo span {
+    color: #2ecc71;
+}
+
+/* ===== СТАТУС ===== */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #95a5a6;
+    transition: 0.3s;
+}
+
+.status-dot.online {
+    background: #2ecc71;
+    box-shadow: 0 0 20px #2ecc71;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+#status-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* ===== ГЕРОЙ ===== */
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero h2 span {
+    color: #2ecc71;
+    text-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+/* ===== IP БЛОК ===== */
+.ip-box {
+    background: linear-gradient(145deg, #1e272e, #151e22);
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid #2ecc71;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.ip-address {
+    background: #0a0f12;
+    padding: 15px 30px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.ip-address span {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: monospace;
+    letter-spacing: 3px;
+    color: #2ecc71;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: #2ecc71;
+    color: #0a0f12;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 0 #1e8449;
+}
+
+.copy-btn:hover {
+    background: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #1e8449;
+}
+
+.copy-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 2px 0 #1e8449;
+}
+
+.copy-feedback {
+    color: #2ecc71;
+    margin-top: 15px;
+    min-height: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.copy-feedback.show {
+    opacity: 1;
+}
+
+/* ===== ОСОБЕННОСТИ ===== */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 60px 0 40px;
+}
+
+.feature-card {
+    background: rgba(20, 30, 40, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    border-color: #2ecc71;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #2ecc71;
+}
+
+/* ===== ПОДКЛЮЧЕНИЕ ===== */
+.connect-section {
+    text-align: center;
+    margin: 50px 0 30px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 1px dashed #2ecc71;
+}
+
+.connect-section h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.version {
+    display: inline-block;
+    background: #2ecc71;
+    color: #0a0f12;
+    padding: 8px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+/* ===== ПОДВАЛ ===== */
+.footer {
+    margin-top: 50px;
+    text-align: center;
+    color: #888;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+}
+
+.footer a {
+    color: #2ecc71;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #27ae60;
+    text-decoration: underline;
+}
+
+/* ===== АДАПТАЦИЯ ===== */
+@media (max-width: 768px) {
+    .container { padding: 25px; }
+    .header { flex-direction: column; text-align: center; }
+    .logo { justify-content: center; }
+    .hero h2 { font-size: 2rem; }
+    .ip-address span { font-size: 1.3rem; }
+}
+
+@media (max-width: 480px) {
+    .hero h2 { font-size: 1.6rem; }
+    .hero p { font-size: 1rem; }
+    .copy-btn { width: 100%; }
+}
