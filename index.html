@@ -347,6 +347,13 @@
             text-overflow: ellipsis;
         }
 
+        .player-card:hover {
+            background: #ff8800;
+            color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px #ff8800;
+        }
+
         .no-players {
             text-align: center;
             padding: 50px;
@@ -468,7 +475,7 @@
             box-shadow: 0 8px 0 #aa5500, 0 0 30px #ff8800;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
+        /* МОДАЛЬНОЕ ОКНО — БЕЗ СКРОЛЛА НА ПК */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -488,27 +495,49 @@
         .modal-content {
             background: linear-gradient(145deg, #0a0c0e, #1a1e22);
             border: 3px solid #ff8800;
-            border-radius: 60px;
-            padding: 50px;
-            max-width: 600px;
+            border-radius: 40px;
+            padding: 30px;
+            max-width: 550px;
             width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
             position: relative;
             box-shadow: 0 0 80px rgba(255,136,0,0.4);
             animation: modalPop 0.4s;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+
+        /* СКРОЛЛ ТОЛЬКО ЕСЛИ СОВСЕМ НЕ ВЛЕЗАЕТ (НА МАЛЕНЬКИХ НОУТАХ) */
+        @media screen and (max-height: 800px) {
+            .modal-content {
+                padding: 20px;
+                max-height: 90vh;
+            }
+            
+            .modal-title {
+                font-size: 28px;
+                margin-bottom: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .total-price {
+                margin: 15px 0;
+                padding: 15px 25px;
+            }
         }
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 40px;
+            top: 15px;
+            right: 20px;
+            font-size: 35px;
             color: #ff8800;
             cursor: pointer;
             transition: 0.3s;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -523,36 +552,36 @@
 
         .modal-title {
             color: #ff8800;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 900;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-shadow: 0 0 20px #ff8800;
             letter-spacing: 3px;
         }
 
-        /* ФОРМА */
+        /* ФОРМА — КОМПАКТНО */
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
             color: #ff8800;
             font-weight: 700;
-            margin-bottom: 12px;
-            font-size: 20px;
+            margin-bottom: 8px;
+            font-size: 18px;
             letter-spacing: 2px;
         }
 
         .form-input {
             width: 100%;
-            padding: 18px 25px;
+            padding: 14px 20px;
             background: #111;
             border: 2px solid #ff8800;
             border-radius: 60px;
             color: white;
-            font-size: 18px;
+            font-size: 17px;
             outline: none;
             transition: 0.3s;
         }
@@ -564,17 +593,17 @@
 
         .promo-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
 
         .promo-btn {
             background: #ff8800;
             color: black;
             border: none;
-            padding: 0 35px;
+            padding: 0 30px;
             border-radius: 60px;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
             transition: 0.3s;
             white-space: nowrap;
@@ -588,20 +617,21 @@
         .payment-methods {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 10px;
         }
 
         .payment-method {
             background: rgba(0,0,0,0.6);
             border: 2px solid rgba(255,136,0,0.3);
             border-radius: 50px;
-            padding: 15px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
             color: #ccc;
             font-weight: 600;
+            font-size: 15px;
         }
 
         .payment-method:hover,
@@ -616,25 +646,25 @@
             background: rgba(255,136,0,0.15);
             border: 2px solid #ff8800;
             border-radius: 60px;
-            padding: 20px 30px;
-            margin: 30px 0;
+            padding: 15px 25px;
+            margin: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 900;
         }
 
         .total-amount {
             color: #ff8800;
-            font-size: 36px;
+            font-size: 32px;
             text-shadow: 0 0 15px #ff8800;
         }
 
         .nick-status {
-            margin-top: 10px;
-            font-size: 15px;
-            min-height: 25px;
+            margin-top: 8px;
+            font-size: 14px;
+            min-height: 20px;
             color: #aaa;
         }
 
@@ -744,15 +774,15 @@
             margin-bottom: 10px;
         }
 
-        /* ПРАВИЛА */
+        /* ПРАВИЛА — ИДЕАЛЬНО РОВНЫЕ */
         .rules-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
             background: rgba(0,0,0,0.7);
             border: 2px solid #ff8800;
             border-radius: 40px;
-            padding: 50px;
+            padding: 40px 50px;
             margin: 40px 0;
         }
 
@@ -761,6 +791,7 @@
             font-size: 32px;
             margin-bottom: 30px;
             text-align: center;
+            text-shadow: 0 0 15px rgba(46,204,113,0.3);
         }
 
         .rules-forbidden h3 {
@@ -768,19 +799,23 @@
             font-size: 32px;
             margin-bottom: 30px;
             text-align: center;
+            text-shadow: 0 0 15px rgba(231,76,60,0.3);
         }
 
         .rules-allowed ul, .rules-forbidden ul {
             list-style: none;
-            padding: 0 20px;
+            padding: 0;
+            margin: 0;
         }
 
         .rules-allowed li, .rules-forbidden li {
-            margin: 20px 0;
+            margin: 18px 0;
             font-size: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 12px;
+            padding-left: 15px;
         }
 
         /* ПОДВАЛ */
@@ -839,7 +874,6 @@
 
             .ip {
                 font-size: 24px;
-                word-break: break-all;
             }
 
             .copy-btn {
@@ -857,10 +891,6 @@
                 font-size: 32px;
             }
 
-            .stat-label {
-                font-size: 14px;
-            }
-
             .features {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -868,14 +898,6 @@
 
             .players-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-
-            .player-card {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                font-size: 14px;
-                padding: 10px 15px;
             }
 
             .section-title {
@@ -891,14 +913,6 @@
                 transform: scale(1);
             }
 
-            .modal-content {
-                padding: 30px;
-            }
-
-            .modal-title {
-                font-size: 28px;
-            }
-
             .payment-methods {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -908,7 +922,7 @@
             }
 
             .promo-btn {
-                padding: 15px;
+                padding: 14px;
                 width: 100%;
             }
 
@@ -918,46 +932,21 @@
                 text-align: center;
             }
 
+            .team-row {
+                gap: 30px;
+            }
+
             .team-card {
                 width: 100%;
                 padding: 30px;
-            }
-
-            .team-card h3 {
-                font-size: 36px;
-            }
-
-            .team-role {
-                font-size: 18px;
-                padding: 6px 25px;
             }
 
             .vacancy-section {
                 padding: 30px;
             }
 
-            .vacancy-title {
-                font-size: 28px;
-            }
-
-            .vacancy-grid {
-                gap: 20px;
-            }
-
-            .vacancy-item {
-                width: 100%;
-            }
-
             .rules-grid {
                 grid-template-columns: 1fr;
-                padding: 30px;
-            }
-
-            .rules-allowed h3, .rules-forbidden h3 {
-                font-size: 28px;
-            }
-
-            .footer {
                 padding: 30px;
             }
 
@@ -972,46 +961,16 @@
                 font-size: 36px;
             }
 
-            .ip {
-                font-size: 20px;
-            }
-
             .stats {
                 grid-template-columns: 1fr;
-            }
-
-            .stat-card {
-                padding: 20px;
-            }
-
-            .players-section {
-                padding: 25px;
             }
 
             .players-title {
                 font-size: 28px;
             }
 
-            .no-players {
-                padding: 30px;
-                font-size: 18px;
-            }
-
             .modal-content {
                 padding: 25px;
-            }
-
-            .modal-title {
-                font-size: 24px;
-            }
-
-            .form-label {
-                font-size: 18px;
-            }
-
-            .form-input {
-                padding: 15px 20px;
-                font-size: 16px;
             }
 
             .payment-methods {
@@ -1020,10 +979,6 @@
 
             .team-card h3 {
                 font-size: 32px;
-            }
-
-            .team-avatar {
-                font-size: 60px;
             }
         }
     </style>
@@ -1217,26 +1172,26 @@
             </div>
         </div>
 
-        <!-- ПРАВИЛА -->
+        <!-- ПРАВИЛА — ИДЕАЛЬНО РОВНЫЕ КОЛОНКИ -->
         <div id="rules" class="tab">
             <h2 class="section-title">📜 ПРАВИЛА</h2>
             <div class="rules-grid">
                 <div class="rules-allowed">
                     <h3>✅ РАЗРЕШЕНО</h3>
                     <ul>
-                        <li>✔️ Строить и развиваться</li>
-                        <li>✔️ Торговать с игроками</li>
-                        <li>✔️ Использовать фермы</li>
-                        <li>✔️ Помогать новичкам</li>
+                        <li><span style="color: #2ecc71; font-size: 24px;">✔️</span> Строить и развиваться</li>
+                        <li><span style="color: #2ecc71; font-size: 24px;">✔️</span> Торговать с игроками</li>
+                        <li><span style="color: #2ecc71; font-size: 24px;">✔️</span> Использовать фермы</li>
+                        <li><span style="color: #2ecc71; font-size: 24px;">✔️</span> Помогать новичкам</li>
                     </ul>
                 </div>
                 <div class="rules-forbidden">
                     <h3>❌ ЗАПРЕЩЕНО</h3>
                     <ul>
-                        <li>❌ Гриферство</li>
-                        <li>❌ Читы</li>
-                        <li>❌ Оскорбления</li>
-                        <li>❌ Спам</li>
+                        <li><span style="color: #e74c3c; font-size: 24px;">❌</span> Гриферство</li>
+                        <li><span style="color: #e74c3c; font-size: 24px;">❌</span> Читы</li>
+                        <li><span style="color: #e74c3c; font-size: 24px;">❌</span> Оскорбления</li>
+                        <li><span style="color: #e74c3c; font-size: 24px;">❌</span> Спам</li>
                     </ul>
                 </div>
             </div>
@@ -1250,7 +1205,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ОПЛАТЫ -->
+    <!-- МОДАЛЬНОЕ ОКНО ОПЛАТЫ — КОМПАКТНОЕ, БЕЗ СКРОЛЛА -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal()">×</div>
@@ -1268,7 +1223,7 @@
                     <input type="text" id="modalPromoCode" class="form-input" placeholder="Введите промокод">
                     <button class="promo-btn" onclick="applyModalPromo()">ПРИМЕНИТЬ</button>
                 </div>
-                <div id="modalPromoStatus" style="margin-top: 10px; font-size: 15px; color: #ffaa00;"></div>
+                <div id="modalPromoStatus" style="margin-top: 8px; font-size: 14px; color: #ffaa00;"></div>
             </div>
 
             <div class="form-group">
@@ -1288,7 +1243,7 @@
             </div>
 
             <button class="donate-select-btn" onclick="processModalPayment()">💎 ОПЛАТИТЬ</button>
-            <p style="color: #888; font-size: 14px; text-align: center; margin-top: 25px;">
+            <p style="color: #888; font-size: 13px; text-align: center; margin-top: 15px;">
                 После оплаты привилегия выдастся автоматически
             </p>
         </div>
