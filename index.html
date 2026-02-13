@@ -45,7 +45,6 @@
             width: 100%;
         }
 
-        /* ШАПКА */
         .header {
             display: flex;
             justify-content: space-between;
@@ -105,7 +104,6 @@
             50% { opacity: 0.7; transform: scale(1.2); }
         }
 
-        /* НАВИГАЦИЯ */
         .nav {
             display: flex;
             justify-content: center;
@@ -150,7 +148,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ГЛАВНАЯ */
         .hero {
             text-align: center;
             padding: 60px 30px;
@@ -236,7 +233,6 @@
             opacity: 1;
         }
 
-        /* СТАТИСТИКА */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -267,7 +263,6 @@
             letter-spacing: 2px;
         }
 
-        /* ОСОБЕННОСТИ */
         .features {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -301,7 +296,6 @@
             margin-bottom: 15px;
         }
 
-        /* ИГРОКИ */
         .players-section {
             margin: 60px 0;
             padding: 40px;
@@ -371,7 +365,6 @@
             font-size: 20px;
         }
 
-        /* ЗАГОЛОВКИ */
         .section-title {
             font-size: 48px;
             text-align: center;
@@ -382,7 +375,6 @@
             letter-spacing: 4px;
         }
 
-        /* ДОНАТ КАРТОЧКИ */
         .donate-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -475,7 +467,6 @@
             box-shadow: 0 8px 0 #aa5500, 0 0 30px #ff8800;
         }
 
-        /* МОДАЛЬНОЕ ОКНО — БЕЗ СКРОЛЛА НА ПК */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -496,36 +487,13 @@
             background: linear-gradient(145deg, #0a0c0e, #1a1e22);
             border: 3px solid #ff8800;
             border-radius: 40px;
-            padding: 30px;
+            padding: 40px;
             max-width: 550px;
             width: 100%;
             position: relative;
             box-shadow: 0 0 80px rgba(255,136,0,0.4);
             animation: modalPop 0.4s;
-            max-height: 95vh;
-            overflow-y: auto;
-        }
-
-        /* СКРОЛЛ ТОЛЬКО ЕСЛИ СОВСЕМ НЕ ВЛЕЗАЕТ (НА МАЛЕНЬКИХ НОУТАХ) */
-        @media screen and (max-height: 800px) {
-            .modal-content {
-                padding: 20px;
-                max-height: 90vh;
-            }
-            
-            .modal-title {
-                font-size: 28px;
-                margin-bottom: 15px;
-            }
-            
-            .form-group {
-                margin-bottom: 15px;
-            }
-            
-            .total-price {
-                margin: 15px 0;
-                padding: 15px 25px;
-            }
+            text-align: center;
         }
 
         .modal-close {
@@ -554,34 +522,33 @@
             color: #ff8800;
             font-size: 32px;
             font-weight: 900;
-            text-align: center;
             margin-bottom: 20px;
             text-shadow: 0 0 20px #ff8800;
             letter-spacing: 3px;
         }
 
-        /* ФОРМА — КОМПАКТНО */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            text-align: left;
         }
 
         .form-label {
             display: block;
             color: #ff8800;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 18px;
             letter-spacing: 2px;
         }
 
         .form-input {
             width: 100%;
-            padding: 14px 20px;
+            padding: 16px 25px;
             background: #111;
             border: 2px solid #ff8800;
             border-radius: 60px;
             color: white;
-            font-size: 17px;
+            font-size: 18px;
             outline: none;
             transition: 0.3s;
         }
@@ -591,84 +558,68 @@
             box-shadow: 0 0 25px rgba(255,136,0,0.5);
         }
 
-        .promo-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .promo-btn {
-            background: #ff8800;
-            color: black;
-            border: none;
-            padding: 0 30px;
-            border-radius: 60px;
-            font-weight: 900;
-            font-size: 17px;
-            cursor: pointer;
-            transition: 0.3s;
-            white-space: nowrap;
-        }
-
-        .promo-btn:hover {
-            background: #ffaa00;
-            box-shadow: 0 0 25px #ff8800;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .payment-method {
-            background: rgba(0,0,0,0.6);
-            border: 2px solid rgba(255,136,0,0.3);
-            border-radius: 50px;
-            padding: 12px 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            color: #ccc;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .payment-method:hover,
-        .payment-method.active {
-            background: #ff8800;
-            border-color: #ffaa00;
-            color: black;
-            box-shadow: 0 0 25px #ff8800;
-        }
-
-        .total-price {
-            background: rgba(255,136,0,0.15);
-            border: 2px solid #ff8800;
-            border-radius: 60px;
-            padding: 15px 25px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 22px;
-            font-weight: 900;
-        }
-
-        .total-amount {
-            color: #ff8800;
-            font-size: 32px;
-            text-shadow: 0 0 15px #ff8800;
-        }
-
         .nick-status {
             margin-top: 8px;
             font-size: 14px;
-            min-height: 20px;
+            min-height: 25px;
             color: #aaa;
         }
 
-        /* КОМАНДА */
+        .progress-container {
+            margin: 30px 0;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #222;
+            border-radius: 60px;
+            overflow: hidden;
+            border: 1px solid #ff8800;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #ff8800;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 15px #ff8800;
+        }
+
+        .progress-text {
+            color: #ffaa00;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .payment-link-container {
+            display: none;
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,136,0,0.1);
+            border: 2px solid #ff8800;
+            border-radius: 30px;
+            word-break: break-all;
+        }
+
+        .payment-link {
+            color: #ff8800;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .payment-link:hover {
+            text-decoration: underline;
+            color: #ffaa00;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: #ff8800;
+            margin-bottom: 15px;
+        }
+
         .team-row {
             display: flex;
             justify-content: center;
@@ -729,7 +680,6 @@
             font-size: 18px;
         }
 
-        /* ВАКАНСИИ */
         .vacancy-section {
             margin-top: 60px;
             padding: 50px;
@@ -770,11 +720,11 @@
 
         .vacancy-item h4 {
             color: #ffaa00;
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 10px;
+            white-space: nowrap;
         }
 
-        /* ПРАВИЛА — ИДЕАЛЬНО РОВНЫЕ */
         .rules-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -818,7 +768,6 @@
             padding-left: 15px;
         }
 
-        /* ПОДВАЛ */
         .footer {
             margin-top: 80px;
             padding: 40px;
@@ -846,140 +795,33 @@
             margin: 15px 0;
         }
 
-        /* ========== АДАПТАЦИЯ ПОД ТЕЛЕФОНЫ ========== */
         @media screen and (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .header {
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-            }
-
-            .status {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .hero p {
-                font-size: 18px;
-                padding: 0 10px;
-            }
-
-            .ip {
-                font-size: 24px;
-            }
-
-            .copy-btn {
-                padding: 12px 30px;
-                font-size: 18px;
-                width: 100%;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-
-            .stat-number {
-                font-size: 32px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .players-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-
-            .section-title {
-                font-size: 36px;
-            }
-
-            .donate-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .donate-card.popular {
-                transform: scale(1);
-            }
-
-            .payment-methods {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .promo-group {
-                flex-direction: column;
-            }
-
-            .promo-btn {
-                padding: 14px;
-                width: 100%;
-            }
-
-            .total-price {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-
-            .team-row {
-                gap: 30px;
-            }
-
-            .team-card {
-                width: 100%;
-                padding: 30px;
-            }
-
-            .vacancy-section {
-                padding: 30px;
-            }
-
-            .rules-grid {
-                grid-template-columns: 1fr;
-                padding: 30px;
-            }
-
-            .footer-ip {
-                font-size: 18px;
-                word-break: break-all;
-            }
+            .container { padding: 15px; }
+            .header { flex-direction: column; padding: 20px; gap: 15px; }
+            .status { width: 100%; justify-content: center; }
+            .hero h1 { font-size: 48px; }
+            .hero p { font-size: 18px; padding: 0 10px; }
+            .ip { font-size: 24px; }
+            .copy-btn { padding: 12px 30px; font-size: 18px; width: 100%; }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .stat-number { font-size: 32px; }
+            .features { grid-template-columns: 1fr; gap: 20px; }
+            .players-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .section-title { font-size: 36px; }
+            .donate-grid { grid-template-columns: 1fr; gap: 30px; }
+            .donate-card.popular { transform: scale(1); }
+            .modal-content { padding: 30px; }
+            .team-card { width: 100%; }
+            .vacancy-item { width: 100%; }
+            .vacancy-item h4 { white-space: normal; }
+            .rules-grid { grid-template-columns: 1fr; padding: 30px; }
         }
 
         @media screen and (max-width: 480px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .players-title {
-                font-size: 28px;
-            }
-
-            .modal-content {
-                padding: 25px;
-            }
-
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-
-            .team-card h3 {
-                font-size: 32px;
-            }
+            .hero h1 { font-size: 36px; }
+            .stats { grid-template-columns: 1fr; }
+            .players-title { font-size: 28px; }
+            .modal-content { padding: 25px; }
         }
     </style>
 </head>
@@ -1075,24 +917,23 @@
         <div id="donate" class="tab">
             <h2 class="section-title">💰 ПРИВИЛЕГИИ</h2>
             
-            <!-- КАРТОЧКИ ПРИВИЛЕГИЙ -->
             <div class="donate-grid">
                 <div class="donate-card">
                     <h3>СТАРТ</h3>
-                    <div class="price">100₽</div>
+                    <div class="price">49₽</div>
                     <ul>
                         <li>✅ Оранжевый ник</li>
                         <li>✅ /kit start</li>
                         <li>✅ 5 домов</li>
                         <li>✅ Доступ в прайм-тайм</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="openModal('СТАРТ', 100)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('СТАРТ', 49)">ВЫБРАТЬ</button>
                 </div>
                 
                 <div class="donate-card popular">
                     <span class="popular-badge">🔥 ХИТ</span>
                     <h3>ПРО</h3>
-                    <div class="price">300₽</div>
+                    <div class="price">99₽</div>
                     <ul>
                         <li>✅ Всё из СТАРТ</li>
                         <li>✅ Неоновый оранжевый ник</li>
@@ -1100,12 +941,12 @@
                         <li>✅ 10 домов</li>
                         <li>✅ Личный варп</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="openModal('ПРО', 300)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('ПРО', 99)">ВЫБРАТЬ</button>
                 </div>
                 
                 <div class="donate-card">
                     <h3>ВИП</h3>
-                    <div class="price">600₽</div>
+                    <div class="price">199₽</div>
                     <ul>
                         <li>✅ Всё из ПРО</li>
                         <li>✅ Огненный оранжевый ник</li>
@@ -1113,7 +954,7 @@
                         <li>✅ 20 домов</li>
                         <li>✅ 3 личных варпа</li>
                     </ul>
-                    <button class="donate-select-btn" onclick="openModal('ВИП', 600)">ВЫБРАТЬ</button>
+                    <button class="donate-select-btn" onclick="openModal('ВИП', 199)">ВЫБРАТЬ</button>
                 </div>
             </div>
         </div>
@@ -1125,7 +966,6 @@
                 ЛЮДИ, КОТОРЫЕ ДЕЛАЮТ СЕРВЕР ЛУЧШЕ
             </p>
             
-            <!-- ОСНОВАТЕЛЬ И ТЕХ АДМИН -->
             <div class="team-row">
                 <div class="team-card owner">
                     <div class="team-avatar">👑</div>
@@ -1146,7 +986,6 @@
                 </div>
             </div>
 
-            <!-- ВАКАНСИИ -->
             <div class="vacancy-section">
                 <div class="vacancy-title">🚀 ХОЧЕШЬ В КОМАНДУ?</div>
                 <p style="color: #eee; font-size: 20px; margin-bottom: 20px;">
@@ -1172,7 +1011,7 @@
             </div>
         </div>
 
-        <!-- ПРАВИЛА — ИДЕАЛЬНО РОВНЫЕ КОЛОНКИ -->
+        <!-- ПРАВИЛА -->
         <div id="rules" class="tab">
             <h2 class="section-title">📜 ПРАВИЛА</h2>
             <div class="rules-grid">
@@ -1205,11 +1044,11 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ОПЛАТЫ — КОМПАКТНОЕ, БЕЗ СКРОЛЛА -->
+    <!-- МОДАЛЬНОЕ ОКНО ОПЛАТЫ -->
     <div id="paymentModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal()">×</div>
-            <div id="modalPrivilegeTitle" class="modal-title">💰 ПРО — 300₽</div>
+            <div id="modalPrivilegeTitle" class="modal-title">💰 ПРО — 99₽</div>
             
             <div class="form-group">
                 <label class="form-label">🎮 ТВОЙ НИК</label>
@@ -1217,45 +1056,43 @@
                 <div id="modalNickStatus" class="nick-status"></div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">🎟️ ПРОМОКОД</label>
-                <div class="promo-group">
-                    <input type="text" id="modalPromoCode" class="form-input" placeholder="Введите промокод">
-                    <button class="promo-btn" onclick="applyModalPromo()">ПРИМЕНИТЬ</button>
+            <!-- ПРОГРЕСС БАР -->
+            <div id="progressContainer" class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
                 </div>
-                <div id="modalPromoStatus" style="margin-top: 8px; font-size: 14px; color: #ffaa00;"></div>
+                <div id="progressText" class="progress-text">⏳ Генерация ссылки...</div>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">💳 СПОСОБ ОПЛАТЫ</label>
-                <div class="payment-methods">
-                    <div class="payment-method active" onclick="selectModalPayment(this, 'card')">💳 Карта</div>
-                    <div class="payment-method" onclick="selectModalPayment(this, 'sbp')">🏦 СБП</div>
-                    <div class="payment-method" onclick="selectModalPayment(this, 'qiwi')">📱 QIWI</div>
-                    <div class="payment-method" onclick="selectModalPayment(this, 'yoomoney')">⭐ ЮMoney</div>
+            <!-- КОНТЕЙНЕР СО ССЫЛКОЙ -->
+            <div id="paymentLinkContainer" class="payment-link-container">
+                <div class="success-icon">✅</div>
+                <div style="color: #ff8800; font-size: 20px; font-weight: 900; margin-bottom: 15px;">
+                    ССЫЛКА ГОТОВА!
                 </div>
+                <a id="paymentLink" href="#" target="_blank" class="payment-link"></a>
+                <button id="payButton" class="donate-select-btn" style="margin-top: 20px;" onclick="redirectToPayment()">
+                    💰 ПЕРЕЙТИ К ОПЛАТЕ
+                </button>
             </div>
 
-            <div class="total-price">
-                <span>ИТОГО:</span>
-                <span class="total-amount" id="modalTotalAmount">300</span>
-                <span style="color: white;">₽</span>
-            </div>
-
-            <button class="donate-select-btn" onclick="processModalPayment()">💎 ОПЛАТИТЬ</button>
-            <p style="color: #888; font-size: 13px; text-align: center; margin-top: 15px;">
-                После оплаты привилегия выдастся автоматически
-            </p>
+            <!-- КНОПКА ЗАПУСКА ГЕНЕРАЦИИ -->
+            <button id="generateButton" class="donate-select-btn" onclick="startPaymentGeneration()">
+                💎 ПОЛУЧИТЬ ССЫЛКУ
+            </button>
         </div>
     </div>
 
     <script>
-        // ========== MINEBIT — ПОЛНЫЙ СКРИПТ ==========
+        // ========== MINEBIT — ФИНАЛЬНАЯ ВЕРСИЯ С ПРОГРЕСС-БАРОМ ==========
         const SERVER_IP = '37.9.15.81';
         const SERVER_PORT = '32568';
         let selectedPrivilege = 'ПРО';
-        let selectedPrice = 300;
+        let selectedPrice = 99;
+        let generatedLink = '';
+        let productCode = 'pro';
 
+        // КОПИРОВАНИЕ IP
         function copyIP() {
             navigator.clipboard.writeText(`${SERVER_IP}:${SERVER_PORT}`).then(() => {
                 const feedback = document.getElementById('copyFeedback');
@@ -1268,6 +1105,7 @@
             });
         }
 
+        // ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
         function switchTab(tabId) {
             const tabs = document.querySelectorAll('.tab');
             const btns = document.querySelectorAll('.nav-btn');
@@ -1280,25 +1118,34 @@
             if (activeBtn) activeBtn.classList.add('active');
         }
 
+        // ОТКРЫТИЕ МОДАЛКИ
         function openModal(privilege, price) {
             selectedPrivilege = privilege;
             selectedPrice = price;
+            
+            // Определяем код товара
+            if (privilege === 'СТАРТ') productCode = 'start';
+            else if (privilege === 'ПРО') productCode = 'pro';
+            else if (privilege === 'ВИП') productCode = 'vip';
+            
             document.getElementById('modalPrivilegeTitle').innerHTML = `💰 ${privilege} — ${price}₽`;
-            document.getElementById('modalTotalAmount').textContent = price;
             document.getElementById('modalMinecraftNick').value = '';
-            document.getElementById('modalPromoCode').value = '';
             document.getElementById('modalNickStatus').innerHTML = '';
-            document.getElementById('modalPromoStatus').innerHTML = '';
-            const methods = document.querySelectorAll('#paymentModal .payment-method');
-            methods.forEach(m => m.classList.remove('active'));
-            methods[0].classList.add('active');
+            
+            // Сброс состояния модалки
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('paymentLinkContainer').style.display = 'none';
+            document.getElementById('generateButton').style.display = 'block';
+            
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
+        // ЗАКРЫТИЕ МОДАЛКИ
         function closeModal() {
             document.getElementById('paymentModal').style.display = 'none';
         }
 
+        // ПРОВЕРКА НИКА
         function checkModalNick(nick) {
             const status = document.getElementById('modalNickStatus');
             if (nick.length < 3) {
@@ -1316,60 +1163,73 @@
             return true;
         }
 
-        function selectModalPayment(element, method) {
-            const methods = document.querySelectorAll('#paymentModal .payment-method');
-            methods.forEach(m => m.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function applyModalPromo() {
-            const promo = document.getElementById('modalPromoCode').value;
-            const status = document.getElementById('modalPromoStatus');
-            const totalElement = document.getElementById('modalTotalAmount');
-            let currentPrice = parseInt(totalElement.textContent);
-            
-            if (promo.toLowerCase() === 'minebit') {
-                const newPrice = Math.floor(currentPrice * 0.9);
-                totalElement.textContent = newPrice;
-                status.innerHTML = '✅ Промокод применён! Скидка 10%';
-                status.style.color = '#2ecc71';
-            } else if (promo.toLowerCase() === 'welcome') {
-                const newPrice = Math.floor(currentPrice * 0.85);
-                totalElement.textContent = newPrice;
-                status.innerHTML = '✅ Промокод применён! Скидка 15%';
-                status.style.color = '#2ecc71';
-            } else if (promo.length > 0) {
-                status.innerHTML = '❌ Промокод недействителен';
-                status.style.color = '#e74c3c';
-            } else {
-                status.innerHTML = '';
-            }
-        }
-
-        function processModalPayment() {
+        // ЗАПУСК ГЕНЕРАЦИИ ССЫЛКИ
+        function startPaymentGeneration() {
             const nick = document.getElementById('modalMinecraftNick').value;
+            
             if (!nick) {
                 alert('❌ Введи ник!');
                 return;
             }
+            
             if (!checkModalNick(nick)) {
                 alert('❌ Некорректный ник!');
                 return;
             }
-            const price = document.getElementById('modalTotalAmount').textContent;
-            const paymentMethod = document.querySelector('#paymentModal .payment-method.active');
-            const method = paymentMethod ? paymentMethod.textContent.trim() : 'Карта';
-            alert(`✅ Перенаправление на оплату...\n\nПривилегия: ${selectedPrivilege}\nСумма: ${price}₽\nНик: ${nick}\nСпособ: ${method}`);
-            closeModal();
+
+            // Прячем кнопку генерации, показываем прогресс-бар
+            document.getElementById('generateButton').style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('paymentLinkContainer').style.display = 'none';
+            
+            // Сброс прогресс-бара
+            let progress = 0;
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            
+            // Анимация прогресса
+            const interval = setInterval(() => {
+                progress += 1;
+                progressFill.style.width = progress + '%';
+                
+                if (progress < 30) {
+                    progressText.innerHTML = '⏳ Создание запроса...';
+                } else if (progress < 60) {
+                    progressText.innerHTML = '⏳ Генерация ссылки...';
+                } else if (progress < 90) {
+                    progressText.innerHTML = '⏳ Получение платежа...';
+                }
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    completePaymentGeneration(nick);
+                }
+            }, 30); // 3 секунды на 100%
         }
 
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('paymentModal');
-            if (event.target === modal) {
+        // ЗАВЕРШЕНИЕ ГЕНЕРАЦИИ
+        function completePaymentGeneration(nick) {
+            // Генерируем тестовую ссылку
+            generatedLink = `https://fastbuying.ru/pay/${productCode}?nick=${nick}&amount=${selectedPrice}`;
+            
+            // Обновляем ссылку в контейнере
+            document.getElementById('paymentLink').innerHTML = generatedLink;
+            document.getElementById('paymentLink').href = generatedLink;
+            
+            // Прячем прогресс-бар, показываем ссылку
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('paymentLinkContainer').style.display = 'block';
+        }
+
+        // ПЕРЕХОД К ОПЛАТЕ
+        function redirectToPayment() {
+            if (generatedLink) {
+                window.open(generatedLink, '_blank');
                 closeModal();
             }
-        });
+        }
 
+        // СТАТУС СЕРВЕРА И СПИСОК ИГРОКОВ
         async function checkServerStatus() {
             try {
                 const statusDot = document.getElementById('statusDot');
@@ -1381,7 +1241,6 @@
                 const response = await fetch(`https://api.mcsrvstat.us/2/${SERVER_IP}:${SERVER_PORT}`, {
                     cache: 'no-cache'
                 });
-                
                 const data = await response.json();
 
                 if (data.online) {
@@ -1423,6 +1282,7 @@
             }
         }
 
+        // ЗАПУСК
         document.addEventListener('DOMContentLoaded', function() {
             checkServerStatus();
             setInterval(checkServerStatus, 30000);
